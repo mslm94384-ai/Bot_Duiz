@@ -5,7 +5,7 @@ import sub from './sub.js';
 
 /* =========== Client ========== */
 const client = new Client({
-  phoneNumber: '20123456789', // Bot number
+  phoneNumber: '212787144013', // Bot number
   prefix: [".", "/", "!"],
   fromMe: false, 
   owners: [
@@ -33,8 +33,8 @@ if (!global.db) {
 /* =========== Config ========== */
 const { config } = client;
 config.info = { 
-  nameBot: "♡ 𝙋𝙊𝙈𝙉𝙄 🎪 〈", 
-  nameChannel: "𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️", 
+  nameBot: "♡ 𝑹𝑬𝒁𝑬𝑬𝑬 〈", 
+  nameChannel: "𝑹𝑬𝑬𝑬", 
   idChannel: "120363225356834044@newsletter",
   urls: {
     repo: "https://github.com/deveni0/Pomni-AI",
@@ -42,8 +42,8 @@ config.info = {
     channel: "https://whatsapp.com/channel/0029VaQim2bAu3aPsRVaDq3v"
   },
   copyright: { 
-    pack: 'ڤـ ـ VA ـ ـا', 
-    author: 'VA'
+    pack: '🫦🍷', 
+    author: '𝑩𝑹𝑬𝑬𝑫'
   },
   images: [
     "https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png",
