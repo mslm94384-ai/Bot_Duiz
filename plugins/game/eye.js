@@ -18,9 +18,9 @@ const NAMES = [
 const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const getPrize = (rank) => {
-  if (rank === 0) return { xp: 500, cookies: 10, emoji: "🎉" };
-  if (rank === 1) return { xp: 300, cookies: 5, emoji: "🎖" };
-  return { xp: 100, cookies: 2, emoji: "⭐" };
+  if (rank === 0) return { xp: 500, cookies: 10, emoji: "👑" };
+  if (rank === 1) return { xp: 300, cookies: 5, emoji: "⚔️" };
+  return { xp: 100, cookies: 2, emoji: "🦾" };
 };
 
 const handler = async (m, { conn }) => {
@@ -30,7 +30,16 @@ const handler = async (m, { conn }) => {
   const g = global.gameEye[chatId];
   if (g?.current) return await conn.sendMessage(chatId, {
     image: { url: g.current.img },
-    caption: g.current.caption
+    caption: g.current.caption,
+    contextInfo: {
+      isForwarded: true,
+      forwardingScore: 1,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+        newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+        serverMessageId: 0
+      }
+    }
   });
 
   if (!g || g.round >= MAX_ROUNDS) {
@@ -49,8 +58,17 @@ const handler = async (m, { conn }) => {
       }
       
       await conn.sendMessage(chatId, {
-        text: `🏆 *انتهت اللعبة*\n\n${prizes.join('\n')}`,
-        mentions: sorted.map(s => s[0])
+        text: `⚔️ *انتهت معركة العيون* 🔥\n\n${prizes.join('\n')}\n\n> تاتاكاي! استمر في القتال يا بطل 🦾`,
+        mentions: sorted.map(s => s[0]),
+        contextInfo: {
+          isForwarded: true,
+          forwardingScore: 1,
+          forwardedNewsletterMessageInfo: {
+            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            serverMessageId: 0
+          }
+        }
       });
     }
     global.gameEye[chatId] = { round: 0, scores: {}, current: null };
@@ -65,11 +83,20 @@ const handler = async (m, { conn }) => {
   const wrong = shuffle([...NAMES]).filter(n => n !== char.name).slice(0, 3);
   const opts = shuffle([char.name, ...wrong]);
   
-  const caption = `👁 خمن الشخصية (${g2.round}/${MAX_ROUNDS})\n\n1. ${opts[0]}\n2. ${opts[1]}\n3. ${opts[2]}\n4. ${opts[3]}`;
+  const caption = `⚔️ *معركة تخمين العيون* 🔥 (${g2.round}/${MAX_ROUNDS})\n\n1. ${opts[0]}\n2. ${opts[1]}\n3. ${opts[2]}\n4. ${opts[3]}\n\n> اختر الرقم الصحيح يا جندي! 🦾`;
   
   const msg = await conn.sendMessage(chatId, {
     image: { url: char.img },
-    caption
+    caption,
+    contextInfo: {
+      isForwarded: true,
+      forwardingScore: 1,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+        newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+        serverMessageId: 0
+      }
+    }
   });
   
   g2.current = {
@@ -82,7 +109,18 @@ const handler = async (m, { conn }) => {
       if (global.gameEye[chatId]?.current) {
         const ans = global.gameEye[chatId].current.answer;
         global.gameEye[chatId].current = null;
-        await conn.sendMessage(chatId, { text: `⏰ الوقت انتهى! الاجابة: *${ans}*\nاكتب .عين للبدء من جديد` });
+        await conn.sendMessage(chatId, { 
+          text: `💀 *الوقت انتهى يا ضعيف!*\nالإجابة الصحيحة: *${ans}*\n\n> المرة الجاية هتبقى أقوى 🦾`,
+          contextInfo: {
+            isForwarded: true,
+            forwardingScore: 1,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+              newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+              serverMessageId: 0
+            }
+          }
+        });
       }
     }, 30000)
   };
@@ -104,12 +142,33 @@ handler.before = async (m, { conn }) => {
   if (answer === cur.answer) {
     g.scores[m.sender] = (g.scores[m.sender] || 0) + 1;
     await conn.sendMessage(m.chat, {
-      text: `✅ صح! عندك ${g.scores[m.sender]} نقطة\nانتظر الجولة القادمة...`,
-      mentions: [m.sender]
+      text: `✅ *تاتاكاي! أحسنت يا بطل!* 🔥\nعندك ${g.scores[m.sender]} نقطة\nانتظر الجولة القادمة... 🦾`,
+      mentions: [m.sender],
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+          newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+          serverMessageId: 0
+        }
+      }
     });
     setTimeout(() => handler(m, { conn }), 200);
   } else {
-    await m.reply("❌ غلط");
+    await conn.sendMessage(m.chat, {
+      text: `❌ *غلط يا جندي!* 💢\nركز في المعركة يا @${m.sender.split('@')[0]} 🦾`,
+      mentions: [m.sender],
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+          newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+          serverMessageId: 0
+        }
+      }
+    });
   }
   return true;
 };
