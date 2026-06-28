@@ -26,36 +26,38 @@ const handler = async (m, { conn, bot, config }) => {
   const subConnected = subBots?.list().filter(b => b.connected).length || 0;
   
   const msg = `
-——> *الـبـوت 🎪*
-- *الاسم:* \`${conn.user.name || bot.config.info.nameBot || "User"}\`
+⚔️ *معلومات معسكر إيرن* 🔥
+
+——> *الـجـنـد 🤖*
+- *الاسم:* \`${conn.user.name || bot.config.info.nameBot || "Eren Bot"}\`
 - *الرقم:* \`wa.me/+${conn.user.id.split(':')[0]}\`
 - *شغال منذ:* \`${uptimeHours.toString().padStart(2, '0')}:${uptimeMins.toString().padStart(2, '0')}:${uptimeSecs.toString().padStart(2, '0')}\`
 
-——> *الـنـظـام 💻*
+——> *الـمـعـسـكـر 💻*
 - *النظام:* \`${platform} ${arch}\`
 - *الجهاز:* \`${hostname}\`
 - *المعالج:* \`${cpuModel.slice(0, 30)}...\`
 - *النوى:* \`${cpuCores} نواة @ ${cpuSpeed}GHz\`
 - *الحمل:* \`${cpuUsage}%\`
 
-——> *الـذاكـرة 🧠*
+——> *الـطـاقـة 🧠*
 - *الرام المستخدم:* \`${usedRam}MB / ${totalRam}GB\`
 - *الرام الفارغ:* \`${freeRam}GB\`
 - *Heap:* \`${heapUsed}MB / ${heapTotal}MB\`
 
-——> *احـصـائـيـات 📊*
-- *المجموعات:* \`${groupCount}\`
+——> *احـصـائـيـات الـقـتـال 📊*
+- *المعسكرات:* \`${groupCount}\`
 
-——> *الـبـوتـات الـفـرعـيـه 🎪*
+——> *الـجـنـود الـفـرعـيـين 🦾*
 - *الإجمالي:* \`${subCount}\`
 - *المتصل:* \`${subConnected}\`
 - *المنفصل:* \`${subCount - subConnected}\`
 
-——> *الـمـالـكـيـن 👑*
+——> *الـقـادة 👑*
 - *العدد:* \`${bot.owners?.length || 0}\`
-- *الرئيسي:* \`${bot.owners?.[0]?.name || 'VA'} (${bot.owners?.[0]?.jid?.split('@')[0] || 'لا يوجد'})\`
+- *القائد:* \`${bot.owners?.[0]?.name || 'Eren'} (${bot.owners?.[0]?.jid?.split('@')[0] || 'لا يوجد'})\`
 
-> *_VII7 BOT SYSTEM_*`;
+> *_تاتاكاي! استمر في القتال يا جندي_* 🦾🔥`;
 
   await conn.sendMessage(m.chat, {
     text: msg,
@@ -72,13 +74,13 @@ const context = (jid, img) => ({
     isForwarded: true,
     forwardingScore: 1,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363225356834044@newsletter',
-        newsletterName: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
+        newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+        newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
         serverMessageId: 0
     },
     externalAdReply: {
-        title: "𝐏𝐎𝐌𝐍𝐈-𝐀𝐈 🎪 | 𝐁𝐨𝐭 𝐢𝐬 𝐛𝐮𝐢𝐥𝐭 𝐨𝐧 𝐭𝐡𝐞 𝐖𝐒/𝐕𝐈𝐈 𝐟𝐫𝐚𝐦𝐞𝐰𝐨𝐫𝐤",
-        body: "𝚆𝚑𝚊𝚝𝚜𝙰𝚙𝚙 𝚋𝚘𝚝 𝚝𝚑𝚊𝚝 𝚒𝚜 𝚎𝚊𝚜𝚢 𝚝𝚘 𝚖𝚘𝚍𝚒𝚏𝚢 𝚊𝚗𝚍 𝚟𝚎𝚛𝚢 𝚏𝚊𝚜𝚝",
+        title: "𝐀𝐓𝐓𝐀𝐂𝐊 𝐎𝐍 𝐓𝐈𝐓𝐀𝐍 ⚔️ | 𝐄𝐫𝐞𝐧 𝐘𝐞𝐚𝐠𝐞𝐫",
+        body: "𝚃𝚊𝚝𝚊𝚔𝚊𝚎 ~ ☆ 𝙵𝚒𝚐𝚑𝚝 𝚏𝚘𝚛 𝚏𝚛𝚎𝚎𝚍𝚘𝚖",
         thumbnailUrl: img,
         sourceUrl: '',
         mediaType: 1,
