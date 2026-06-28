@@ -1,16 +1,16 @@
 import { createSticker } from "../../system/utils.js";
 
 const test = async (m, { conn, args }) => {
-  if (!m.quoted) return m.reply("❤️ ~ يرجى الرد على ملصق ~ 💙");
+  if (!m.quoted) return m.reply("⚔️ *رد على الملصق يا جندي!* 🔥");
   
   let [pack, author] = args.join(" ").split(" | ");
   
   if (!args.length) {
-    return m.reply("📝 *الاستخدام الصحيح:*\n\n.حقوق اسم الباك | اسم المؤلف\n\n*مثال:*\n`.حقوق venom | 2010`");
+    return m.reply("📝 *الاستخدام الصحيح يا قائد:*\n\n.حقوق اسم الباك | اسم المؤلف\n\n*مثال:*\n`.حقوق إيرن | 2026`");
   }
   
-  if (!pack) pack = "VA";
-  if (author === undefined) author = null;
+  if (!pack) pack = "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓";
+  if (author === undefined) author = "🐦";
   
   const q = await m.quoted;
   
@@ -33,13 +33,13 @@ const context = (jid, img) => ({
     isForwarded: true,
     forwardingScore: 1,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363225356834044@newsletter',
-        newsletterName: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
+        newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+        newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
         serverMessageId: 0
     },
     externalAdReply: {
-        title: "𝐏𝐎𝐌𝐍𝐈-𝐀𝐈 🎪 | 𝐁𝐨𝐭 𝐢𝐬 𝐛𝐮𝐢𝐥𝐭 𝐨𝐧 𝐭𝐡𝐞 𝐖𝐒/𝐕𝐈𝐈 𝐟𝐫𝐚𝐦𝐞𝐰𝐨𝐫𝐤",
-        body: "𝚆𝚑𝚊𝚝𝚜𝙰𝚙𝚙 𝚋𝚘𝚝 𝚝𝚑𝚊𝚝 𝚒𝚜 𝚎𝚊𝚜𝚢 𝚝𝚘 𝚖𝚘𝚍𝚒𝚏𝚢 𝚊𝚗𝚍 𝚟𝚎𝚛𝚢 𝚏𝚊𝚜𝚝",
+        title: "𝐀𝐓𝐓𝐀𝐂𝐊 𝐎𝐍 𝐓𝐈𝐓𝐀𝐍 ⚔️ | 𝐄𝐫𝐞𝐧 𝐘𝐞𝐚𝐠𝐞𝐫",
+        body: "𝚃𝚊𝚝𝚊𝚔𝚊𝚎 ~ ☆ 𝙵𝚒𝚐𝚑𝚝 𝚏𝚘𝚛 𝚏𝚛𝚎𝚎𝚍𝚘𝚖",
         thumbnailUrl: img,
         sourceUrl: '',
         mediaType: 1,
