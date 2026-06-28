@@ -14,9 +14,22 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             return null;
         };
 
-        // دالة لعمل منشن مضمن في النص
-        const getMentionText = (userId) => {
-            return `@${userId.split('@')[0]}`;
+        // دالة لجلب اسم المستخدم من المجموعة
+        const getParticipantName = async (userId) => {
+            try {
+                const groupMetadata = await conn.groupMetadata(m.chat);
+                const participant = groupMetadata.participants.find(p => p.id === userId);
+                if (participant && participant.name) {
+                    return participant.name;
+                }
+                // لو مش لاقي الاسم، استخدم pushName من الرسالة
+                if (m.mentionedJid && m.mentionedJid.includes(userId)) {
+                    // حاول تجيب الاسم من الـ message
+                }
+                return userId.split('@')[0]; // الرقم كـ fallback
+            } catch {
+                return userId.split('@')[0];
+            }
         };
 
         if (command === "ضيف") {
@@ -25,8 +38,9 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             if (!user) return m.reply("❌ مفيش شخص محدد");
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'add');
-            const mentionText = getMentionText(user);
-            return m.reply(`✅ *تمت إضافة ${mentionText} بنجاح* 🐦`, null, { mentions: [user] });
+            const userName = await getParticipantName(user);
+            // استخدام الاسم بدل الأرقام
+            return m.reply(`✅ *تمت إضافة @${userName} بنجاح* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "انطر") {
@@ -39,53 +53,50 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             }
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'remove');
-            const mentionText = getMentionText(user);
-            return m.reply(`🐦 *تم نطرك بنجاح يا ${mentionText}* 🐦`, null, { mentions: [user] });
+            const userName = await getParticipantName(user);
+            return m.reply(`🐦 *تم نطرك بنجاح يا @${userName}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "رفاعي") {
             let user = getUser();
             if (!user) return m.reply("❌ منشن أو رد على العضو");
             
-            // التأكد إن الشخص مش مشرف قبل ما يترفع
             try {
                 const groupMetadata = await conn.groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (member && (member.admin === 'admin' || member.admin === 'superadmin')) {
-                    const mentionText = getMentionText(user);
-                    return m.reply(`❌ ${mentionText} مشرف بالفعل يا معلم 😂`, null, { mentions: [user] });
+                    const userName = await getParticipantName(user);
+                    return m.reply(`❌ @${userName} مشرف بالفعل يا معلم 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'promote');
-            const mentionText = getMentionText(user);
-            // هنا التعديل الرئيسي - منشن قبل وبعد
-            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح ${mentionText}* 🐦`, null, { mentions: [user] });
+            const userName = await getParticipantName(user);
+            // التعديل الرئيسي هنا - استخدام الاسم بدل الرقم
+            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح يا @${userName}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "ريح") {
             let user = getUser();
             if (!user) return m.reply("❌ منشن أو رد على العضو");
             
-            // منع تنزيل الأونر
             if (isBotOwner(user)) {
-                const mentionText = getMentionText(user);
-                return m.reply(`❌ مش هتنزل ${mentionText} الأونر يا معلم 😂`, null, { mentions: [user] });
+                const userName = await getParticipantName(user);
+                return m.reply(`❌ مش هتنزل @${userName} الأونر يا معلم 😂`, null, { mentions: [user] });
             }
             
-            // التأكد إن الشخص مشرف قبل ما يتنزل
             try {
                 const groupMetadata = await conn.groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (!member || (member.admin !== 'admin' && member.admin !== 'superadmin')) {
-                    const mentionText = getMentionText(user);
-                    return m.reply(`❌ ${mentionText} مش مشرف أصلاً 😂`, null, { mentions: [user] });
+                    const userName = await getParticipantName(user);
+                    return m.reply(`❌ @${userName} مش مشرف أصلاً 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'demote');
-            const mentionText = getMentionText(user);
-            return m.reply(`👾 *شوف حد يديك رول بق يا ${mentionText}* 👾`, null, { mentions: [user] });
+            const userName = await getParticipantName(user);
+            return m.reply(`👾 *شوف حد يديك رول بق يا @${userName}* 👾`, null, { mentions: [user] });
         }
         
     } catch (error) {
