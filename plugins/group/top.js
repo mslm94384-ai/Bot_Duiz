@@ -3,15 +3,15 @@ const participants = await conn.groupMetadata(m.chat).then(metadata => metadata.
 const jids = participants.map(p => p.id);
 
 if (jids.length < 2) {
-    return conn.sendMessage(m.chat, { text: "المجموعة صغيرة جداً" });
+    return conn.sendMessage(m.chat, { text: "💀 *المجموعة صغيرة جداً يا جندي! محتاجين ناس عشان المعركة* ⚔️" });
 }
 
 const shuffledJids = [...jids].sort(() => Math.random() - 0.5);
 const topUsers = shuffledJids.slice(0, Math.min(10, jids.length));
 
-const emojis = ["😂", "🤬", "🙂", "😎"];
+const emojis = ["😂", "🤬", "🙂", "😎", "🔥", "💀", "⚔️", "🦾"];
 let em = emojis[Math.floor(Math.random() * emojis.length)]
-let messageText = `*${em} توب اكتر 10 > ${args.join(' ')} ${em}*\n\n`;
+let messageText = `⚔️ *${em} توب أقوى 10 جنود > ${args.join(' ') || 'في المعركة'} ${em}* 🔥\n\n`;
 
 topUsers.forEach((user, index) => {
     let percentage;
@@ -29,13 +29,24 @@ topUsers.forEach((user, index) => {
         percentage = Math.floor(Math.random() * 40) + 30; // 30-70%
     }
     
-    const medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "👤";
-    messageText += `${medal} *${index + 1}.* @${user.split('@')[0]} - بنسبة *${percentage}%*\n`;
+    const medal = index === 0 ? "👑" : index === 1 ? "🥈" : index === 2 ? "🥉" : "🦾";
+    messageText += `${medal} *${index + 1}.* @${user.split('@')[0]} - بنسبة قتال *${percentage}%*\n`;
 });
+
+messageText += `\n> تاتاكاي! استمر في القتال يا جنود 🦾🔥`;
 
 return conn.sendMessage(m.chat, { 
     text: messageText, 
-    mentions: topUsers 
+    mentions: topUsers,
+    contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            serverMessageId: 0
+        }
+    }
 });
 };
 handler.usage =  ["توب"];
