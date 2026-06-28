@@ -4,30 +4,30 @@ export default async function before(m, { conn }) {
     const user = global.db.users[m.sender];
     let xp = user.xp || 0;
     let level = user.level || 0;
-    let nameLevel = user.nameLevel || '🎪 مشاهد';
+    let nameLevel = user.nameLevel || '👤 مواطن';
     
     const levels = [
-        { min: 0, max: 99, name: '🎪 مشاهد' },
-        { min: 100, max: 249, name: '🎭 متدرب سيرك' },
-        { min: 250, max: 499, name: '🤡 مهرج صغير' },
-        { min: 500, max: 799, name: '🎪 لاعب أكروبات' },
-        { min: 800, max: 1199, name: '🎭 ساحر مبتدئ' },
-        { min: 1200, max: 1699, name: '🤹 لاعب نار' },
-        { min: 1700, max: 2299, name: '🎪 مروض أسود' },
-        { min: 2300, max: 2999, name: '🎭 ساحر الظل' },
-        { min: 3000, max: 3799, name: '🤡 مهرج الأكاذيب' },
-        { min: 3800, max: 4699, name: '🎪 نجم السيرك' },
-        { min: 4700, max: 5699, name: '🎭 وهمي' },
-        { min: 5700, max: 6799, name: '🤹 سيد الألعاب' },
-        { min: 6800, max: 7999, name: '🎪 مدير الحلبة' },
-        { min: 8000, max: 9299, name: '🎭 أسطورة السيرك' },
-        { min: 9300, max: 10699, name: '🤡 كابوس المهرج' },
-        { min: 10700, max: 12199, name: '🎪 ساحر الأوهام' },
-        { min: 12200, max: 13799, name: '🎭 مخرج العجائب' },
-        { min: 13800, max: 15499, name: '🤹 سيد الخواتم' },
-        { min: 15500, max: 17499, name: '🎪 إمبراطور السيرك' },
-        { min: 17500, max: 19999, name: '🎭 حارس البوابة' },
-        { min: 20000, max: Infinity, name: '🌀 الرقمي الأوحد' }
+        { min: 0, max: 99, name: '👤 مواطن' },
+        { min: 100, max: 249, name: '🛡️ جندي متدرب' },
+        { min: 250, max: 499, name: '⚔️ جندي استطلاع' },
+        { min: 500, max: 799, name: '🗡️ محارب متمرس' },
+        { min: 800, max: 1199, name: '🔥 جندي النخبة' },
+        { min: 1200, max: 1699, name: '💢 كابتن السرية' },
+        { min: 1700, max: 2299, name: '🦾 قائد الفيلق' },
+        { min: 2300, max: 2999, name: '⚡ عملاق الهجوم' },
+        { min: 3000, max: 3799, name: '🌋 عملاق التدمير' },
+        { min: 3800, max: 4699, name: '💀 عملاق المؤسس' },
+        { min: 4700, max: 5699, name: '🌀 إيرن المُحرر' },
+        { min: 5700, max: 6799, name: '🔥 إيرن الغاضب' },
+        { min: 6800, max: 7999, name: '⚔️ محارب الحرية' },
+        { min: 8000, max: 9299, name: '🛡️ حامل الرغبة' },
+        { min: 9300, max: 10699, name: '💢 قلب الغضب' },
+        { min: 10700, max: 12199, name: '🌋 رماد العالم' },
+        { min: 12200, max: 13799, name: '💀 نهاية العمالقة' },
+        { min: 13800, max: 15499, name: '🔥 إيرن العملاق' },
+        { min: 15500, max: 17499, name: '🦾 المؤسس الأعلى' },
+        { min: 17500, max: 19999, name: '⚡ إمبراطور التيتان' },
+        { min: 20000, max: Infinity, name: '🌀 إيرن ييغر - المدمر' }
     ];
     
     let newLevel = level;
@@ -52,9 +52,9 @@ export default async function before(m, { conn }) {
         user.level = newLevel;
         user.nameLevel = newNameLevel;
         
-        const msg = `╭─┈─┈─┈─⟞🎪⟝─┈─┈─┈─╮
-┃ *🎭 تـرقـيـة فـي الـسـيـرك 🎪*
-╰─┈─┈─┈─⟞🎭⟝─┈─┈─┈─╯
+        const msg = `╭─┈─┈─┈─⟞⚔️⟝─┈─┈─┈─╮
+┃ *⚔️ تـرقـيـة إيـرن يـيـغـر 🔥*
+╰─┈─┈─┈─⟞💢⟝─┈─┈─┈─╯
 
 ┃ @${m.sender.split('@')[0]}
 ┃ المستوى السابق: *${oldLevel}*
@@ -63,9 +63,9 @@ export default async function before(m, { conn }) {
 ┃ 🏷️ *لقبك الجديد:*
 ┃ ✦ ${newNameLevel} ✦
 
-╭─┈─┈─┈─⟞🎭⟝─┈─┈─┈─╮
-┃ *العرض لسه مخلصش يا بطل* 🎪
-╰─┈─┈─┈─⟞🤡⟝─┈─┈─┈─╯`;
+╭─┈─┈─┈─⟞🔥⟝─┈─┈─┈─╮
+┃ *المعركة لسه مخلصتش يا جندي* 🦾
+╰─┈─┈─┈─⟞💀⟝─┈─┈─┈─╯`;
         
         await conn.sendMessage(m.chat, {
             text: msg,
@@ -74,13 +74,13 @@ export default async function before(m, { conn }) {
                 isForwarded: true,
                 forwardingScore: 1,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363225356834044@newsletter',
-                    newsletterName: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
                     serverMessageId: 0
                 },
                 externalAdReply: {
-                    title: "𝐏𝐎𝐌𝐍𝐈-𝐀𝐈 🎪 | السيرك الرقمي",
-                    body: "تـرقـيـة فـي الـسـيـرك",
+                    title: "𝐀𝐓𝐓𝐀𝐂𝐊 𝐎𝐍 𝐓𝐈𝐓𝐀𝐍 ⚔️ | 𝐄𝐫𝐞𝐧 𝐘𝐞𝐚𝐠𝐞𝐫",
+                    body: "𝚃𝚊𝚝𝚊𝚔𝚊𝚎 ~ ☆ 𝙵𝚘𝚛 𝚏𝚛𝚎𝚎𝚍𝚘𝚖",
                     thumbnailUrl: "https://i.pinimg.com/originals/81/89/fd/8189fd909bbae4ba4e8f1d940f500a60.jpg",
                     sourceUrl: '',
                     mediaType: 1,
@@ -91,4 +91,4 @@ export default async function before(m, { conn }) {
     }
     
     return false;
-}
+            }
