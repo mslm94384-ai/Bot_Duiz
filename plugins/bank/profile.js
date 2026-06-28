@@ -2,7 +2,7 @@ async function handler(m, { conn, bot }) {
     const user = global.db?.users[m.sender] || {};
     const xp = user.xp || 0;
     const level = user.level || 0;
-    const nameLevel = user.nameLevel || '🎪 مـشـاهـد';
+    const nameLevel = user.nameLevel || '👤 مواطن';
     const cookies = user.cookies || 0;
     const warnings = user.warnings || 0;
     const banned = user.banned || false;
@@ -23,15 +23,15 @@ async function handler(m, { conn, bot }) {
     
     const profilePic = await conn.profilePictureUrl(m.sender, 'image').catch(() => 'https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png');
     
-    const msg = `╭─┈─┈─┈─⟞🎪⟝─┈─┈─┈─╮
-┃ *🎭 بـروفـايـل ${pushName} 🎪*
-╰─┈─┈─┈─⟞🎭⟝─┈─┈─┈─╯
+    const msg = `╭─┈─┈─┈─⟞⚔️⟝─┈─┈─┈─╮
+┃ *⚔️ بـروفـايـل إيـرن يـيـغـر 🔥*
+╰─┈─┈─┈─⟞💢⟝─┈─┈─┈─╯
 
 ┃ 📱 *الـرقـم:* ${phoneNumber}
 ┃ 🏷️ *الاسـم:* ${pushName}
 ┃ 📝 *الاسـم الـمـسـجـل:* ${name}
 ┃ 📅 *الـعـمـر:* ${age}
-┃ 🎭 *الـلـقـب:* ${nameLevel}
+┃ 🦾 *الـلـقـب:* ${nameLevel}
 ┃ 📊 *الـمـسـتـوى:* ${level}
 ┃ ⭐ *الـنـقـاط:* ${xp} / ${nextLevelXp}
 ┃ 📈 *الـتـقـدم:* [${'⬜'.repeat(Math.floor(xpProgress / 10))}${'⬛'.repeat(10 - Math.floor(xpProgress / 10))}] ${xpProgress}%
@@ -39,11 +39,10 @@ async function handler(m, { conn, bot }) {
 ┃ ⚠️ *الـتـحـذيـرات:* ${warnings}
 ┃ 🏷️ *الـحـالـة:* ${status}
 
-╭─┈─┈─┈─⟞🎭⟝─┈─┈─┈─╮
-┃ *اسـتـمـر فـي الـتـفـاعـل لـتـرفـع مـسـتـواك* 🚀
-╰─┈─┈─┈─⟞🤡⟝─┈─┈─┈─╯`;
-    
-    const cfg = bot.config.info;
+╭─┈─┈─┈─⟞🔥⟝─┈─┈─┈─╮
+┃ *تـاتـاكـاي! قـاتـل مـن أجـل الـحـريـة* 🦾
+╰─┈─┈─┈─⟞💀⟝─┈─┈─┈─╯`;
+
     await conn.sendMessage(m.chat, {
         image: { url: profilePic },
         caption: msg,
@@ -52,8 +51,8 @@ async function handler(m, { conn, bot }) {
             isForwarded: true,
             forwardingScore: 1,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: cfg.idChannel,
-                newsletterName: cfg.nameChannel,
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
                 serverMessageId: 0
             }
         }
