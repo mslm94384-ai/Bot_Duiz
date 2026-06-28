@@ -1,11 +1,15 @@
 const test = async (m, { conn, bot }) => {
-  m.react("🟢")
+  m.react("💀")
   
-  conn.msgUrl(m.chat, "♡゙ Stop the bot...", { 
-    title: "𝘗𝘰𝘮𝘯𝘪 𝘈𝘐 𝘪𝘴 𝘢 𝘞𝘩𝘢𝘵𝘴𝘈𝘱𝘱 𝘣𝘰𝘵 𝘧𝘳𝘰𝘮 𝘵𝘩𝘦 𝘝𝘐𝘐7𝘓𝘐𝘕𝘒 𝘓𝘪𝘣𝘳𝘢𝘳𝘺",
-    body: "𝑇𝒉𝑒 𝑏𝑜𝑡 𝑖𝑠 𝑠𝑖𝑚𝑝𝑙𝑒 𝑡𝑜 𝑚𝑜𝑑𝑖𝑓𝑦",
+  conn.msgUrl(m.chat, "💀 *المعركة توقفت... استريحوا يا جنود* 🛑", { 
+    title: "𝐄𝐫𝐞𝐧 𝐘𝐞𝐚𝐠𝐞𝐫 𝐁𝐨𝐭 ⚔️",
+    body: "𝚃𝚊𝚝𝚊𝚔𝚊𝚎 ~ ☆ 𝚁𝚎𝚜𝚝 𝚏𝚘𝚛 𝚗𝚘𝚠",
     img: "https://g.top4top.io/p_3700yob0b1.jpg",
-    big: false 
+    big: false,
+    newsletter: {
+      name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+      jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
+    }
   });
   
   setTimeout(() => {
