@@ -1,6 +1,6 @@
 export default async function before(m, { conn , bot }) {
   const triggers = {
-    "ڤينوم": ["📂", "🗃️", "☕", "🪐", "🐍"],
+    "ايرن": ["🔥", "💢", "⚔️", "🦾", "💀"],
     "ڤيني": ["🎼", "🎪", "🎨", "🎯", "🎲"]
   };
 
