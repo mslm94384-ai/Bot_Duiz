@@ -9,19 +9,25 @@ let user = async (m, { args, command, text, conn }) => {
         );
 
         if (!participant) {
-            return m.reply(`الرقم ${targetNumber} لازم يبقي الجروب`);
+            return m.reply(`⚔️ *الرقم لازم يبقى في المعسكر يا جندي!* 🔥`);
         }
 
         const user = {
-            name: m.name || "Owner",
+            name: m.name || "جندي مجهول",
             jid: participant.phoneNumber,
             lid: participant.id
         };
         
-        m.reply(JSON.stringify(user, null, 2));
+        m.reply(`⚔️ *معلومات الجندي* 🦾
 
+📛 *الاسم:* ${user.name}
+📱 *الرقم:* ${user.jid}
+🆔 *المعرف:* ${user.lid}
+
+> تاتاكاي! استمر في القتال يا جندي 🔥`);
+        
     } catch (err) {
-        m.reply(err.message);
+        m.reply(`❌ *حدث خطأ يا جندي!* 💢\n> ${err.message}`);
     }
 };
 
