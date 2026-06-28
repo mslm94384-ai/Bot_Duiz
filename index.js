@@ -56,55 +56,6 @@ sub(client)
   }
 }, 2000);
 
-/* =========== أوامر القفل والفتح ========== */
-client.on('command', async (m, command, args, text) => {
-    try {
-        // أمر قفل المجموعة (هنرش)
-        if (command === "هنرش" || command === "اقفل" || command === "قفل") {
-            if (!m.isGroup) return m.reply("❌ دي للمجموعات بس");
-            
-            // التحقق من صلاحيات البوت
-            const groupMetadata = await client.groupMetadata(m.chat);
-            const botParticipant = groupMetadata.participants.find(p => p.id === client.user.id);
-            if (!botParticipant || botParticipant.admin !== 'admin') {
-                return m.reply("❌ البوت مش أدمن في المجموعة");
-            }
-            
-            // التحقق من صلاحيات المستخدم
-            const userParticipant = groupMetadata.participants.find(p => p.id === m.sender);
-            if (!userParticipant || (userParticipant.admin !== 'admin' && userParticipant.admin !== 'superadmin')) {
-                return m.reply("❌ دي لأدمن بس");
-            }
-            
-            await client.groupSettingUpdate(m.chat, 'announcement');
-            return m.reply("🔒 *تم قفل المجموعة* 🔒\n🚫 ممنوع الكتابة من الأعضاء العاديين");
-        }
-        
-        // أمر فتح المجموعة (افتح)
-        if (command === "افتح" || command === "فتح") {
-            if (!m.isGroup) return m.reply("❌ دي للمجموعات بس");
-            
-            // التحقق من صلاحيات البوت
-            const groupMetadata = await client.groupMetadata(m.chat);
-            const botParticipant = groupMetadata.participants.find(p => p.id === client.user.id);
-            if (!botParticipant || botParticipant.admin !== 'admin') {
-                return m.reply("❌ البوت مش أدمن في المجموعة");
-            }
-            
-            // التحقق من صلاحيات المستخدم
-            const userParticipant = groupMetadata.participants.find(p => p.id === m.sender);
-            if (!userParticipant || (userParticipant.admin !== 'admin' && userParticipant.admin !== 'superadmin')) {
-                return m.reply("❌ دي لأدمن بس");
-            }
-            
-            await client.groupSettingUpdate(m.chat, 'not_announcement');
-            return m.reply("🔓 *تم فتح المجموعة* 🔓\n✅ كل الأعضاء يقدر يكتبوا دلوقتي");
-        }
-    } catch (error) {
-        console.error('Error in lock/unlock commands:', error);
-        await m.reply("❌ " + error.message);
-    }
-});
 
 /* =========== Catch Errors ========== */
 process.on('uncaughtException', (e) => {
