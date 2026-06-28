@@ -5,13 +5,13 @@ import sub from './sub.js';
 
 /* =========== Client ========== */
 const client = new Client({
-  phoneNumber: '01110302392', // Bot number
+  phoneNumber: '201110302392', // Bot number
   prefix: [".", "/", "!"],
   fromMe: false, 
   owners: [
-    { name: "𝐄𝐑𝐈𝐍", jid: "01110302392@s.whatsapp.net", lid: "247579682029763@lid" },
-    { name: "𝐀𝐑𝐌𝐀𝐍", jid: "01227812859@s.whatsapp.net", lid: "221307316789354@lid" },
-    { name: "𝐒𝐔𝐊𝐔𝐍𝐀", jid: "01554302724@s.whatsapp.net", lid: "50414477168824@lid" }
+    { name: "𝐄𝐑𝐈𝐍", jid: "201044013292@s.whatsapp.net", lid: "247579682029763@lid" },
+    { name: "𝐀𝐑𝐌𝐀𝐍", jid: "201227812859@s.whatsapp.net", lid: "221307316789354@lid" },
+    { name: "𝐒𝐔𝐊𝐔𝐍𝐀", jid: "201554302724@s.whatsapp.net", lid: "50414477168824@lid" }
   ],
   settings: { noWelcome: false },
   commandsPath: './plugins'
