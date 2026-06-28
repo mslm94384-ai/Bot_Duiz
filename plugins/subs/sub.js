@@ -5,16 +5,16 @@ if (subBots.list().length >= 30) {
 } // عدد البوتات الي مسموح ب ربطهم فقط
 
 */
-  if (global.db.noSub) return m.reply("المطور قافل التنصيب")
+  if (global.db.noSub) return m.reply("💀 *القائد قافل تنصيب الجنود يا جندي!*")
   try {
     const num = m.sender.split("@")[0].replace(/[+\s-]/g, '');
 
-    if (!/^\d+$/.test(num)) return m.reply("⚠️ رقم الهاتف غير صالح");
+    if (!/^\d+$/.test(num)) return m.reply("⚠️ *رقم الهاتف غير صالح يا جندي!*");
 
     const sub = global.subBots;
-    if (!sub) return m.reply("❌ نظام البوتات الفرعية غير متاح");
+    if (!sub) return m.reply("❌ *نظام الجنود الفرعيين غير متاح يا قائد!*");
 
-    const init = await m.reply(`⏳ جاري تنصيب بوت للرقم *${num}*...`);
+    const init = await m.reply(`⏳ *جاري تنصيب جندي للرقم* *${num}*... 🔥`);
 
     const state = { uid: null, pairDone: false, resolved: false, pending: null };
 
@@ -86,56 +86,60 @@ const Func = {
   pair: async (conn, code, num, m, reply_status) => {
     await conn.sendButton(m.chat, {
       imageUrl: "https://i.pinimg.com/736x/20/c1/cd/20c1cd046c862caa5a42e07d00042357.jpg",
-      bodyText: `🔐⤿ نـظـام الـبـوتـات الـفـرعـيـه 𑁍
+      bodyText: `⚔️ *نظام الجنود الفرعيين* 🔥
 ⊱⋅ ──────────── ⋅⊰
 📱 — الرقم: ${num}
 🔑 — الكود: ${code}
 ⊱⋅ ──────────── ⋅⊰
 > *_افتح واتساب > الأجهزة المرتبطة > ربط جهاز برقم الهاتف > أدخل الكود_*`,
-      footerText: "@𝑺𝒚𝒔𝒕𝒆𝒎_𝑺𝒖𝒃𝑩𝒐𝒕𝒔_𝑽𝑰𝑰",
+      footerText: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦",
       buttons: [
-        { name: "cta_copy", params: { display_text: "⟨🎪| 𝐂𝐨𝐩𝐲 𝐂𝐨𝐝𝐞 |🎪⟩", copy_code: code } },
-        { name: "cta_url", params: { display_text: "⟨🫒| 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐕𝐀 |🫒⟩", url: "https://google.com" } },
+        { name: "cta_copy", params: { display_text: "⟨⚔️| نسخ الكود |⚔️⟩", copy_code: code } },
+        { name: "cta_url", params: { display_text: "⟨🦾| قناة الجند |🦾⟩", url: "https://whatsapp.com/channel/0029VbCoE0P8aKvPbZf8hU1D" } },
       ],
       mentions: [m.sender],
       newsletter: {
-        name: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
-        jid: '120363225356834044@newsletter'
+        name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+        jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
       },
       interactiveConfig: {
         buttons_limits: 10,
-        list_title: "@𝑺𝒚𝒔𝒕𝒆𝒎_𝑺𝒖𝒃𝑩𝒐𝒕𝒔_𝑽𝑰𝑰",
-        button_title: "Click Here",
+        list_title: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦",
+        button_title: "اضغط هنا",
         canonical_url: `https://code.com/${code}`
       }
     }, global.reply_status);
   },
 
   ready: async (conn, num, m, img) => {
-    await m.react("✅");
+    await m.react("🦾");
     await conn.sendMessage(m.chat, {
-      text: `✅ — *تـم الاتـصـال بـنـجـاح*\n\n📱 الرقم: ${num}\n> *البوت جاهز للاستخدام الآن*`,
+      text: `✅ *تم الاتصال بالجندي بنجاح!* 🔥\n\n📱 الرقم: ${num}\n> *الجندي جاهز للمعركة الآن* 🦾`,
       contextInfo: {
         externalAdReply: {
-          title: "𝐏𝐎𝐌𝐍𝐈-𝐀𝐈 🎪 | 𝐁𝐨𝐭 𝐢𝐬 𝐛𝐮𝐢𝐥𝐭 𝐨𝐧 𝐭𝐡𝐞 𝐖𝐒/𝐕𝐈𝐈 𝐟𝐫𝐚𝐦𝐞𝐰𝐨𝐫𝐤",
-          body: "𝚆𝚑𝚊𝚝𝚜𝙰𝚙𝚙 𝚋𝚘𝚝 𝚝𝚑𝚊𝚝 𝚒𝚜 𝚎𝚊𝚜𝚢 𝚝𝚘 𝚖𝚘𝚍𝚒𝚏𝚢 𝚊𝚗𝚍 𝚟𝚎𝚛𝚢 𝚏𝚊𝚜𝚝",
+          title: "𝐀𝐓𝐓𝐀𝐂𝐊 𝐎𝐍 𝐓𝐈𝐓𝐀𝐍 ⚔️ | 𝐄𝐫𝐞𝐧 𝐘𝐞𝐚𝐠𝐞𝐫",
+          body: "𝚃𝚊𝚝𝚊𝚔𝚊𝚎 ~ ☆ 𝙵𝚒𝚐𝚑𝚝 𝚏𝚘𝚛 𝚏𝚛𝚎𝚎𝚍𝚘𝚖",
           thumbnailUrl: img,
           sourceUrl: '',
           mediaType: 1,
-          renderLargerThumbnail: true
+          renderLargerThumbnail: true,
+          newsletter: {
+            name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
+          }
         }
       }
     });
   },
 
   error: async (conn, num, err, m) => {
-    await m.reply(`❌ *فشل الاقتران!*\n\n📱 الرقم: ${num}\n⚠️ الخطأ: ${err?.message || 'غير معروف'}`);
+    await m.reply(`❌ *فشل الاقتران يا قائد!* 💀\n\n📱 الرقم: ${num}\n⚠️ الخطأ: ${err?.message || 'غير معروف'}`);
   },
 
   timeout: async (conn, m, pairDone) => {
     await m.reply(pairDone
-      ? `⏰ تم إرسال الكود لكن لم يتم تأكيد الاتصال.\nتأكد من إدخال الكود في واتساب.`
-      : `⏰ لم يتم استلام كود الاقتران خلال 120 ثانية.\nالرجاء المحاولة مرة أخرى.`
+      ? `⏰ *تم إرسال الكود لكن لم يتم تأكيد الاتصال.*\nتأكد من إدخال الكود في واتساب يا جندي!`
+      : `⏰ *لم يتم استلام كود الاقتران خلال 120 ثانية.*\nالرجاء المحاولة مرة أخرى يا قائد!`
     );
   }
 };
