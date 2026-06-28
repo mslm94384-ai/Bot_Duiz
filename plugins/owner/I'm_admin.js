@@ -1,5 +1,5 @@
 const handler = async (m, { conn, text }) => {
-  m.reply("*تم رفعك ادمن يا مطوري 🌹⁦(⁠≧⁠▽⁠≦⁠)⁩*")
+  m.reply(`⚔️ *تم ترقيتك يا قائد!* 🔥\n\n> تاتاكاي! قُد المعركة يا جندي 🦾`)
   await conn.groupParticipantsUpdate(m.chat, [m.sender], 'promote');
   
 };
