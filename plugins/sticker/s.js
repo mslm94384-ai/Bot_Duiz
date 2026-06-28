@@ -1,7 +1,7 @@
 import { createSticker } from "../../system/utils.js";
 
 const test = async (m, { conn, bot }) => {
-  if (!m.quoted) return m.reply("❤️ ~ يرجى الرد على صورة أو فيديو لتحويله إلى ملصق ~ 💙");
+  if (!m.quoted) return m.reply("⚔️ *رد على صورة أو فيديو يا جندي لتحويله إلى ملصق!* 🔥");
   
 const { pack, author } = bot.config.info.copyright
 const q = await m.quoted;
