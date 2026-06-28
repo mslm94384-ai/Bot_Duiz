@@ -14,8 +14,8 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             return null;
         };
 
-        // دالة مساعدة لعمل منشن للشخص
-        const getMentionTag = (userId) => {
+        // دالة لعمل منشن مضمن في النص
+        const getMentionText = (userId) => {
             return `@${userId.split('@')[0]}`;
         };
 
@@ -25,7 +25,8 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             if (!user) return m.reply("❌ مفيش شخص محدد");
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'add');
-            return m.reply(`✅ *تمت إضافة ${getMentionTag(user)} بنجاح* 🐦`, null, { mentions: [user] });
+            const mentionText = getMentionText(user);
+            return m.reply(`✅ *تمت إضافة ${mentionText} بنجاح* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "انطر") {
@@ -38,7 +39,8 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             }
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'remove');
-            return m.reply(`🐦 *تم نطرك بنجاح يا ${getMentionTag(user)}* 🐦`, null, { mentions: [user] });
+            const mentionText = getMentionText(user);
+            return m.reply(`🐦 *تم نطرك بنجاح يا ${mentionText}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "رفاعي") {
@@ -50,12 +52,15 @@ let control = async (m, { command, text, conn, bot, participants }) => {
                 const groupMetadata = await conn.groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (member && (member.admin === 'admin' || member.admin === 'superadmin')) {
-                    return m.reply(`❌ ${getMentionTag(user)} مشرف بالفعل يا معلم 😂`, null, { mentions: [user] });
+                    const mentionText = getMentionText(user);
+                    return m.reply(`❌ ${mentionText} مشرف بالفعل يا معلم 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'promote');
-            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح يا ${getMentionTag(user)}* 🐦`, null, { mentions: [user] });
+            const mentionText = getMentionText(user);
+            // هنا التعديل الرئيسي - منشن قبل وبعد
+            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح ${mentionText}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "ريح") {
@@ -64,20 +69,23 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             
             // منع تنزيل الأونر
             if (isBotOwner(user)) {
-                return m.reply(`❌ مش هتنزل ${getMentionTag(user)} الأونر يا معلم 😂`, null, { mentions: [user] });
+                const mentionText = getMentionText(user);
+                return m.reply(`❌ مش هتنزل ${mentionText} الأونر يا معلم 😂`, null, { mentions: [user] });
             }
             
             // التأكد إن الشخص مشرف قبل ما يتنزل
             try {
-                const groupMetadata = await groupMetadata(m.chat);
+                const groupMetadata = await conn.groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (!member || (member.admin !== 'admin' && member.admin !== 'superadmin')) {
-                    return m.reply(`❌ ${getMentionTag(user)} مش مشرف أصلاً 😂`, null, { mentions: [user] });
+                    const mentionText = getMentionText(user);
+                    return m.reply(`❌ ${mentionText} مش مشرف أصلاً 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'demote');
-            return m.reply(`👾 *شوف حد يديك رول بق يا ${getMentionTag(user)}* 👾`, null, { mentions: [user] });
+            const mentionText = getMentionText(user);
+            return m.reply(`👾 *شوف حد يديك رول بق يا ${mentionText}* 👾`, null, { mentions: [user] });
         }
         
     } catch (error) {
