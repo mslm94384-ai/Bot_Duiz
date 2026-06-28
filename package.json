@@ -1,14 +1,14 @@
 {
-  "name": "Pomni AI",
+  "name": "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓",
   "version": "2.0.0",
-  "description": "Simple WhatsApp bot, Modified by VENi - youssefv",
+  "description": "Simple WhatsApp bot - 𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🧛",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": ["whatsapp-bot", "pomni-ai"],
-  "author": "VENi - youssefv",
+  "keywords": ["whatsapp-bot", "erin-bot", "attack-on-titan", "eren-yeager"],
+  "author": "Erin Mody - 𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🧛",
   "license": "MIT",
   "dependencies": {
     "meowsab": "https://github.com/deveni0/ws/tarball/main",
