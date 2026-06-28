@@ -3,7 +3,7 @@ const example = async (m, { conn }) => {
 await conn.sendButton(m.chat, {
   imageUrl: "https://i.pinimg.com/736x/f3/5d/2e/f35d2ed376e03aa254e7f34b4b94992e.jpg",
   bodyText: "Hello! This is the message text",
-  footerText: "Footer text",
+  footerText: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦",
   buttons: [
     // 1. Quick Reply
     { name: "quick_reply", params: { display_text: "👍 Quick Reply", id: "quick1" } },
@@ -39,8 +39,8 @@ await conn.sendButton(m.chat, {
   ],
   mentions: [m.sender],
   newsletter: {
-      name: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
-      jid: '120363225356834044@newsletter'
+      name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+      jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
     },
   interactiveConfig: {
     buttons_limits: 10,
