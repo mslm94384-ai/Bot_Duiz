@@ -5,18 +5,13 @@ import sub from './sub.js';
 
 /* =========== Client ========== */
 const client = new Client({
-  phoneNumber: '20123456789', // Bot number
+  phoneNumber: '01110302392', // Bot number
   prefix: [".", "/", "!"],
   fromMe: false, 
   owners: [
-  // Owner 1
-    { name: "VA", lid: "247579682029763@lid", jid: "972569311531@s.whatsapp.net" },
-  // Owner 2
-    { name: "emam", lid: "221307316789354@lid", jid: "201144480436@s.whatsapp.net" },
-  // Owner 3
-    { name: "Sukuna", jid: "201033024135@s.whatsapp.net", lid: "50414477168824@lid" },
-  // Owner 4 
-   { name: "عمورتي", jid: "201050079089@s.whatsapp.net", lid: "51664513925368@lid" }
+    { name: "𝐄𝐑𝐈𝐍", jid: "01110302392@s.whatsapp.net", lid: "247579682029763@lid" },
+    { name: "𝐀𝐑𝐌𝐀𝐍", jid: "01227812859@s.whatsapp.net", lid: "221307316789354@lid" },
+    { name: "𝐒𝐔𝐊𝐔𝐍𝐀", jid: "01554302724@s.whatsapp.net", lid: "50414477168824@lid" }
   ],
   settings: { noWelcome: false },
   commandsPath: './plugins'
@@ -33,17 +28,17 @@ if (!global.db) {
 /* =========== Config ========== */
 const { config } = client;
 config.info = { 
-  nameBot: "♡ 𝙋𝙊𝙈𝙉𝙄 🎪 〈", 
-  nameChannel: "𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️", 
-  idChannel: "120363225356834044@newsletter",
+  nameBot: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🧛", 
+  nameChannel: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦", 
+  idChannel: "0029VbCoE0P8aKvPbZf8hU1D@newsletter",
   urls: {
     repo: "https://github.com/deveni0/Pomni-AI",
     api: "https://emam-api.web.id",
-    channel: "https://whatsapp.com/channel/0029VaQim2bAu3aPsRVaDq3v"
+    channel: "https://whatsapp.com/channel/0029VbCoE0P8aKvPbZf8hU1D"
   },
   copyright: { 
-    pack: 'ڤـ ـ VA ـ ـا', 
-    author: 'VA'
+    pack: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🧛', 
+    author: '🐦'
   },
   images: [
     "https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png",
@@ -70,17 +65,3 @@ process.on('uncaughtException', (e) => {
 process.on('unhandledRejection', (err) => {
     console.error('Unhandled Rejection:', err)
 });
-
-
-/* 
-=========== Memory Monitor ========== 
-
-setInterval(() => {
-    const used = process.memoryUsage().rss / 1024 / 1024
-    if (used > 800) {
-        console.log(`🔄 Bot memory full (${used.toFixed(1)}MB), restarting...`)
-        process.exit(1) 
-    }
-}, 300_000) 
-
-*/
