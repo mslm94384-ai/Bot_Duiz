@@ -11,7 +11,7 @@ export default async function before(m, { conn }) {
             });
 
             await conn.sendMessage(m.chat, { 
-                text: `🚫 *تم حذف الرابط*\n\n@${m.sender.split('@')[0]} ممنوع نشر روابط الجروبات أو القنوات\n\n> يرجى الالتزام بقوانين المجموعة`,
+                text: `🐦 *متنزلش لينك يكسمك* @${m.sender.split('@')[0]}`,
                 mentions: [m.sender]
             });
 
