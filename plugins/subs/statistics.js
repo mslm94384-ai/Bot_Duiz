@@ -1,6 +1,6 @@
 const run = async (m, { conn, bot }) => {
   const sub = global.subBots;
-  if (!sub) return m.reply("❌ نـظـام الـبـوتـات الـفـرعـيـه غير متاح");
+  if (!sub) return m.reply("❌ *نظام الجنود الفرعيين غير متاح يا قائد!*");
 
   const stats = sub.stats();
   const uptime = process.uptime();
@@ -8,18 +8,18 @@ const run = async (m, { conn, bot }) => {
   const hours = Math.floor((uptime % 86400) / 3600);
   const minutes = Math.floor((uptime % 3600) / 60);
 
-  const text = `📊⤿ احـصـائـيـات الـبـوتـات الـفـرعـيـه 𑁍
+  const text = `⚔️ *إحصائيات الجنود الفرعيين في المعسكر* 🔥
 ⊱⋅ ──────────── ⋅⊰
-📈 — المجموع: ${stats.total}
-🟢 — متصل: ${stats.connected}
-🔴 — غير متصل: ${stats.disconnected}
+🦾 — المجموع: ${stats.total}
+🟢 — في المعركة: ${stats.connected}
+🔴 — في الاستراحة: ${stats.disconnected}
 💬 — الرسائل: ${stats.totalMessages}
 ⊱⋅ ──────────── ⋅⊰
-⏱️ — مدة التشغيل: ${days} يوم ${hours} ساعة ${minutes} دقيقة
+⏱️ — مدة القتال: ${days} يوم ${hours} ساعة ${minutes} دقيقة
 ⊱⋅ ──────────── ⋅⊰
-🆔 — البوت الرئيسي: ${bot.sock.user.id.split('@')[0]}
+🆔 — القائد: ${bot.sock.user.id.split('@')[0]}
 ⊱⋅ ──────────── ⋅⊰
-> *_VII7 SubBot System_*`;
+> *_تاتاكاي! استمر في القتال يا قائد_* 🦾🔥`;
 
   await m.reply(text);
 };
