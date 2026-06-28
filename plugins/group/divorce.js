@@ -3,7 +3,7 @@ const participants = await conn.groupMetadata(m.chat).then(metadata => metadata.
 const jids = participants.map(p => p.id);
 
 if (jids.length < 2) {
-    return conn.sendMessage(m.chat, { text: "المجموعة صغيرة جداً" });
+    return conn.sendMessage(m.chat, { text: "💀 *المجموعة صغيرة جداً يا جندي! محتاجين ناس عشان المعركة* ⚔️" });
 }
 
 let index1 = Math.floor(Math.random() * jids.length);
@@ -24,12 +24,21 @@ const content = {
 };
 
 return conn.sendMessage(m.chat, { 
-    text: `*👨🏻‍⚖️ مبروك الطلاق تمني لكم كل خير 👩🏻‍⚖️*
+    text: `⚔️ *المحكمة العسكرية تعلن الطلاق!* 💢
 
-*تعلن المحكمه طلاق العريس [ @${content.user1.split('@')[0]} ] من العروسه [ @${content.user2.split('@')[0]} ] 
+*تعلن المحكمة فسخ الزواج بين الجندي [ @${content.user1.split('@')[0]} ] والجندية [ @${content.user2.split('@')[0]} ] 
 
-> *ادفع النفقه بقي ياحبيبي 🌹*`, 
-    mentions: [content.user1, content.user2] 
+> *ادفع النفقة يا جندي! دي معركة جديدة* 🦾🔥`, 
+    mentions: [content.user1, content.user2],
+    contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            serverMessageId: 0
+        }
+    }
 }, { quoted: m });
 };
 
