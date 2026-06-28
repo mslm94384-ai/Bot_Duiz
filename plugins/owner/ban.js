@@ -9,7 +9,7 @@ const ff = async (m, { conn, text, command }) => {
     }
     
     if (!target) {
-        return m.reply(`*~ 💙 منشن شخص مثل /${command} @${m.sender.split('@')[0]} ❤️ ~*`);
+        return m.reply(`⚔️ *منشن الجندي يا قائد!* 🔥\n> مثال: .${command} @${m.sender.split('@')[0]}`);
     }
     
     const jid = await m.lid2jid(target);
@@ -21,19 +21,37 @@ const ff = async (m, { conn, text, command }) => {
         if (user.banned) {
             delete user.banned;
             await conn.sendMessage(m.chat, { 
-                text: `*✅ ~تم فك حظر @${target.split('@')[0]}*\n> *_دلوقت يقدر يكلم البوت عادي_*`, 
-                mentions: [target] 
+                text: `✅ *تم فك حظر الجندي @${target.split('@')[0]}* 🦾\n> *_دلوقت يقدر يرجع للمعركة_*`, 
+                mentions: [target],
+                contextInfo: {
+                    isForwarded: true,
+                    forwardingScore: 1,
+                    forwardedNewsletterMessageInfo: {
+                        newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                        newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                        serverMessageId: 0
+                    }
+                }
             });
         } else {
-            m.reply(`*❌ ~هذا المستخدم ليس محظوراً*`);
+            m.reply(`💢 *الجندي @${target.split('@')[0]} مش محظور يا قائد!*`, { mentions: [target] });
         }
         return;
     }
     
     user.banned = true;
     await conn.sendMessage(m.chat, { 
-        text: `*✅ ~تم حظر @${target.split('@')[0]}*\n> *_مش هيعرف يكلم البوت تاني_*`, 
-        mentions: [target] 
+        text: `✅ *تم حظر الجندي @${target.split('@')[0]}* 💀\n> *_مش هيعرف يقاتل معانا تاني_*`, 
+        mentions: [target],
+        contextInfo: {
+            isForwarded: true,
+            forwardingScore: 1,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                serverMessageId: 0
+            }
+        }
     });
 };
 
