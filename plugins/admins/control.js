@@ -28,7 +28,7 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             return m.reply("*✅ تمت الإضافة*");
         }
         
-        if (command === "طرد") {
+        if (command === "انطر") {
             let user = getUser();
             if (!user) return m.reply("❌ منشن أو رد على العضو");
             
@@ -38,21 +38,55 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             }
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'remove');
-            return m.reply("✅ تم الطرد");
+            
+            // رسالة الطرد الجديدة
+            const userTag = user.split('@')[0];
+            return m.reply(`🐦 *تم نطرك بنجاح يا @${userTag}* 🐦`, null, { mentions: [user] });
         }
         
-        if (command === "رفع") {
+        if (command === "رفاعي") {
             let user = getUser();
             if (!user) return m.reply("❌ منشن أو رد على العضو");
+            
+            // التأكد إن الشخص مش مشرف قبل ما يترفع
+            try {
+                const groupMetadata = await conn.groupMetadata(m.chat);
+                const member = groupMetadata.participants.find(p => p.id === user);
+                if (member && (member.admin === 'admin' || member.admin === 'superadmin')) {
+                    return m.reply("❌ ده مشرف بالفعل يا معلم 😂");
+                }
+            } catch {}
+            
             await conn.groupParticipantsUpdate(m.chat, [user], 'promote');
-            return m.reply("✅ تم الرفع");
+            
+            // رسالة الرفع الجديدة
+            const userTag = user.split('@')[0];
+            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح يا @${userTag}* 🐦`, null, { mentions: [user] });
         }
         
-        if (command === "خفض") {
+        if (command === "ريح") {
             let user = getUser();
             if (!user) return m.reply("❌ منشن أو رد على العضو");
+            
+            // منع تنزيل الأونر
+            if (isBotOwner(user)) {
+                return m.reply("❌ مش هتنزل الأونر يا معلم 😂");
+            }
+            
+            // التأكد إن الشخص مشرف قبل ما يتنزل
+            try {
+                const groupMetadata = await conn.groupMetadata(m.chat);
+                const member = groupMetadata.participants.find(p => p.id === user);
+                if (!member || (member.admin !== 'admin' && member.admin !== 'superadmin')) {
+                    return m.reply("❌ ده مش مشرف أصلاً 😂");
+                }
+            } catch {}
+            
             await conn.groupParticipantsUpdate(m.chat, [user], 'demote');
-            return m.reply("✅ تم الخفض");
+            
+            // رسالة التنزيل الجديدة
+            const userTag = user.split('@')[0];
+            return m.reply(`👾 *شوف حد يديك رول بق يا @${userTag}* 👾`, null, { mentions: [user] });
         }
         
     } catch (error) {
@@ -60,8 +94,8 @@ let control = async (m, { command, text, conn, bot, participants }) => {
     }
 };
 
-control.usage = ['ضيف', 'طرد', 'رفع', 'خفض'];
-control.command = ['ضيف', 'طرد', 'رفع', 'خفض'];
+control.usage = ['ضيف', 'انطر', 'رفاعي', 'ريح'];
+control.command = ['ضيف', 'انطر', 'رفاعي', 'ريح'];
 control.admin = true;
 control.botAdmin = true;
 control.category = "admin";
