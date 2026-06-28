@@ -20,8 +20,17 @@ async function handler(m, { command, text, conn }) {
         game.player2 = m.sender;
         game.status = 'playing';
         return conn.sendMessage(m.chat, { 
-            text: `🎮 بدأت اللعبة!\n\n${drawBoard(game.board)}\n\n@${game.player1.split('@')[0]} (❌) ضد @${game.player2.split('@')[0]} (⭕)\n\n@${game.player1.split('@')[0]} يبدأ! اختر رقم من 1 إلى 9`,
-            mentions: [game.player1, game.player2] 
+            text: `⚔️ *معركة XO بدأت!* 🔥\n\n${drawBoard(game.board)}\n\n@${game.player1.split('@')[0]} (❌) ضد @${game.player2.split('@')[0]} (⭕)\n\n@${game.player1.split('@')[0]} يبدأ! اختر رقم من 1 إلى 9 🦾`,
+            mentions: [game.player1, game.player2],
+            contextInfo: {
+                isForwarded: true,
+                forwardingScore: 1,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                    serverMessageId: 0
+                }
+            }
         });
     }
     
@@ -33,7 +42,7 @@ async function handler(m, { command, text, conn }) {
     }
     
     global.xoGames[m.chat] = { player1: m.sender, player2: null, board: Array(9).fill(null), turn: 'X', status: 'waiting' };
-    return m.reply(`🎮 تم إنشاء لعبة XO!\n\n@${m.sender.split('@')[0]} ينتظر خصماً.\n\nاكتب *.xo* للانضمام!`, null, { mentions: [m.sender] });
+    return m.reply(`⚔️ *تم إنشاء معركة XO!* 🔥\n\n@${m.sender.split('@')[0]} ينتظر خصماً.\n\nاكتب *.xo* للانضمام! 🦾`, null, { mentions: [m.sender] });
 }
 
 handler.before = async (m, { conn }) => {
@@ -56,18 +65,30 @@ handler.before = async (m, { conn }) => {
         
         if (winner) {
             winnerJid = winner === 'X' ? game.player1 : game.player2;
-            text = `${drawBoard(game.board)}\n\n🎉 @${winnerJid.split('@')[0]} فاز!`;
+            text = `${drawBoard(game.board)}\n\n🎉 *تاتاكاي! @${winnerJid.split('@')[0]} فاز بالمعركة!* 🔥`;
             
             if (global.db?.users[winnerJid]) {
                 global.db.users[winnerJid].xp = (global.db.users[winnerJid].xp || 0) + 500;
                 global.db.users[winnerJid].cookies = (global.db.users[winnerJid].cookies || 0) + 10;
-                text += `\n\n🏆 +500 XP | 🍪 +10 كوكيز`;
+                text += `\n\n🏆 +500 XP | 🍪 +10 كوكيز\n\n> استمر في القتال يا بطل! 🦾`;
             }
         } else {
-            text = `${drawBoard(game.board)}\n\n🤝 تعادل!`;
+            text = `${drawBoard(game.board)}\n\n🤝 *تعادل! معركة متساوية* ⚔️`;
         }
         
-        await conn.sendMessage(m.chat, { text, mentions: winnerJid ? [winnerJid] : undefined });
+        await conn.sendMessage(m.chat, { 
+            text, 
+            mentions: winnerJid ? [winnerJid] : undefined,
+            contextInfo: {
+                isForwarded: true,
+                forwardingScore: 1,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                    serverMessageId: 0
+                }
+            }
+        });
         delete global.xoGames[m.chat];
         return true;
     }
@@ -75,8 +96,17 @@ handler.before = async (m, { conn }) => {
     game.turn = game.turn === 'X' ? 'O' : 'X';
     const nextPlayer = game.turn === 'X' ? game.player1 : game.player2;
     await conn.sendMessage(m.chat, { 
-        text: `${drawBoard(game.board)}\n\n@${nextPlayer.split('@')[0]} دورك! (${game.turn})`,
-        mentions: [nextPlayer] 
+        text: `${drawBoard(game.board)}\n\n@${nextPlayer.split('@')[0]} دورك يا جندي! (${game.turn}) 🦾\n> اختر رقم من 1 إلى 9`,
+        mentions: [nextPlayer],
+        contextInfo: {
+            isForwarded: true,
+            forwardingScore: 1,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                serverMessageId: 0
+            }
+        }
     });
     return true;
 };
