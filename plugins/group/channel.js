@@ -1,5 +1,5 @@
 const handler = async (m, { conn, text }) => {
-  if (!text) return m.reply('⚠️ ابعت رابط القناة أو كود الدعوة')
+  if (!text) return m.reply('⚔️ *ابعت رابط القناة أو كود الدعوة يا جندي!* 🔥')
 
   try {
     const invite = text.includes('https')
@@ -34,12 +34,12 @@ const handler = async (m, { conn, text }) => {
     await conn.sendButton(m.chat, {
       imageUrl: img,
       bodyText: msg,
-      footerText: "VENi ~ VII7",
+      footerText: "𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦",
       buttons: [
         {
           name: "cta_copy",
           params: {
-            display_text: "📋 Coby JID",
+            display_text: "📋 نسخ JID",
             copy_code: jid
           }
         }
@@ -58,9 +58,9 @@ const handler = async (m, { conn, text }) => {
     }, global.reply_status)
 
   } catch (e) {
-    m.reply('❌ حصل خطأ، تأكد من الرابط أو الكود')
+    m.reply('❌ *حصل خطأ يا جندي! تأكد من الرابط أو الكود* 💢')
   }
 }
 
 handler.command = ['قناة']
-export default handler
+export default handler;
