@@ -1,12 +1,12 @@
 async function test(m, { conn, bot, text }) {
   try {
-    if (!text) return m.reply("*💙 ~ اكتب اسم البحث انجلش عشان يطلع لك الصور ~ ❤️*");
+    if (!text) return m.reply("⚔️ *اكتب اسم البحث يا جندي!* 🔥");
     
     const res = await bot.Api.search.pinterestImages({ q: text });
     const arr = res.data;
     
     if (!arr || arr.length === 0) {
-      return m.reply("*⚠️ ~ لا توجد نتائج للبحث ~*");
+      return m.reply("💀 *مفيش نتائج للبحث يا جندي!*");
     }
     
     const start = Math.floor(Math.random() * (arr.length - 10));
@@ -27,13 +27,13 @@ async function test(m, { conn, bot, text }) {
     });
 
     return await conn.sendCarousel(m.chat, {
-      headerText: `📸 البحث الخاص بك → *[ ${text} ]* `,
-      globalFooterText: 'Swipe to see more images →',
+      headerText: `⚔️ نتيجة البحث يا جندي → *[ ${text} ]* 🔥`,
+      globalFooterText: 'Swipe to see more images → 🦾',
       cards: cards,
       mentions: [m.sender],
       newsletter: {
-      name: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
-      jid: '120363225356834044@newsletter'
+      name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+      jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
     },
     }, reply_status);
     
