@@ -1,14 +1,14 @@
 const run = async (m, { conn, bot }) => {
   const sub = global.subBots;
-  if (!sub) return m.reply("❌ نـظـام الـبـوتـات الـفـرعـيـه غير متاح");
+  if (!sub) return m.reply("❌ *نظام الجنود الفرعيين غير متاح يا قائد!*");
   
-  if (!m.quoted) return m.reply("📝 قم بالرد على الرسالة التي تريد إذاعتها");
+  if (!m.quoted) return m.reply("⚔️ *رد على رسالة الجندي يا قائد!* 🔥");
   
   
   const bots = sub.list();
   const activeBots = bots.filter(b => b.connected && b.phone && b.id !== bot.id);
   
-  if (activeBots.length === 0) return m.reply("📭 لا يوجد بوتات فرعية متصلة للإذاعة");
+  if (activeBots.length === 0) return m.reply("💀 *مفيش جنود فرعيين متصلين للإذاعة يا قائد!*");
   
   let success = 0;
   let fail = 0;
@@ -44,14 +44,14 @@ const run = async (m, { conn, bot }) => {
     }
   }
   
-  await m.reply(`✅⤿ تـم الـإذاعـه 𑁍
+  await m.reply(`⚔️ *تم الإذاعة في المعسكر!* 🔥
 ⊱⋅ ──────────── ⋅⊰
-✓🌹 الـنـجـاح: ${success}
-✓🫒 فـشـل: ${fail}
-✓🌹 الـبـوتـات: ${activeBots.length}
-✓🫒 الـجـروبـات: ${groupCount}
+✓🦾 النجاح: ${success}
+✓💀 الفشل: ${fail}
+✓🦾 الجنود: ${activeBots.length}
+✓💀 المعسكرات: ${groupCount}
 ⊱⋅ ──────────── ⋅⊰
-> *_VII7 SubBot System_*`);
+> *_تاتاكاي! استمر في القتال يا قائد_* 🦾🔥`);
 };
 
 run.command = ["اذاعة_فرعي", "اذاعه_فرعي"];
