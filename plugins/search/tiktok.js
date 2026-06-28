@@ -1,5 +1,5 @@
 async function test(m, { conn, bot, text }) {
-  if (!text) return m.reply("#🫯: اكتب نص جنب الأمر")
+  if (!text) return m.reply("⚔️ *اكتب نص البحث يا جندي!* 🔥")
   try {
   const res = await fetch(`https://www.emam-api.web.id/home/sections/Search/api/tiktok/videos?q=${text}`)
 const { data } = await res.json()
@@ -15,19 +15,19 @@ if (data && data.length > 0) {
             { 
                 name: "cta_copy", 
                 params: { 
-                    display_text: "💟╎ My Channel", 
-                    copy_code: "https://whatsapp.com/channel/0029Vb3UUKz3QxS3bgWmTc3x" 
+                    display_text: "💟╎ قناتي", 
+                    copy_code: "https://whatsapp.com/channel/0029VbCoE0P8aKvPbZf8hU1D" 
                 } 
             },
         ],
         mentions: [m.sender],
         newsletter: {
-            name: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
-            jid: '120363225356834044@newsletter'
+            name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
         },
     }, global.reply_status)
 } else {
-    await conn.sendMessage(m.chat, { text: `لا يوجد "${text}"` })
+    await conn.sendMessage(m.chat, { text: `💀 *مفيش فيديوهات لـ "${text}" يا جندي!*` })
 }
     
   } catch (error) {
