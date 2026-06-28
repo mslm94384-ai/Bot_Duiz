@@ -3,18 +3,18 @@ const cooldown = new Map();
 const handler = async (m, { conn }) => {
     const target = await m.lid2jid(m.quoted?.sender) || m.mentionedJid?.[0];
     
-    if (!target) return m.reply(`*🕊️ رد على رسالة العضو أو منشن العضو*\nمثال: .سرقة @user`);
-    if (target === m.sender) return m.reply(`*❌ لا يمكنك سرقة نفسك*`);
+    if (!target) return m.reply(`⚔️ *رد على رسالة العضو أو منشن العضو*\nمثال: .سرقة @user`);
+    if (target === m.sender) return m.reply(`❌ *لا يمكنك سرقة نفسك يا جبان*`);
     
     const userTarget = global.db?.users[target];
-    if (!userTarget?.xp) return m.reply(`*❌ هذا العضو ليس لديه نقاط*`);
-    if (userTarget.xp < 50) return m.reply(`*🤲 حرام ده فقير! عنده بس ${userTarget.xp} نقطة*\n> خليه يجمع شوية الأول`);
+    if (!userTarget?.xp) return m.reply(`💀 *هذا العضو ليس لديه نقاط*`);
+    if (userTarget.xp < 50) return m.reply(`🛡️ *حرام ده فقير! عنده بس ${userTarget.xp} نقطة*\n> خليه يجمع شوية الأول`);
     
     const now = Date.now();
     const lastSteal = cooldown.get(m.sender) || 0;
     if (now - lastSteal < 3600000) {
         const remaining = Math.ceil((3600000 - (now - lastSteal)) / 60000);
-        return m.reply(`*⏳ انتظر ${remaining} دقيقة قبل السرقة مرة أخرى*`);
+        return m.reply(`⏳ *انتظر ${remaining} دقيقة قبل السرقة مرة أخرى*\n> حتى إيرن كان بيصبر`);
     }
     
     const userSender = global.db.users[m.sender] || {};
@@ -29,18 +29,25 @@ const handler = async (m, { conn }) => {
         const pic = await conn.profilePictureUrl(m.sender, 'image').catch(() => 'https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png');
         await conn.sendMessage(m.chat, {
             image: { url: pic },
-            caption: `╭─┈─┈─⟞🚨⟝─┈─┈─╮
+            caption: `╭─┈─┈─⟞💢⟝─┈─┈─╮
 ┃ ❌ فـشـلـت الـسـرقـة
-╰─┈─┈─⟞💔⟝─┈─┈─╯
+╰─┈─┈─⟞🔥⟝─┈─┈─╯
 
 ┃ @${m.sender.split('@')[0]}
-┃ 😭 تم اكتشافك!
+┃ 😤 تم اكتشافك يا ضعيف!
 ┃ 💸 خسرت ${penalty} نقطة
 
-╭─┈─┈─⟞🎪⟝─┈─┈─╮
-┃ *حـاول بـعـد سـاعـة* ⏳
-╰─┈─┈─⟞🤡⟝─┈─┈─╯`,
-            contextInfo: { mentionedJid: [m.sender] }
+╭─┈─┈─⟞⚔️⟝─┈─┈─╮
+┃ *تـاتـاكـاي! بـعـد سـاعـة* 🦾
+╰─┈─┈─⟞💀⟝─┈─┈─╯`,
+            contextInfo: { 
+                mentionedJid: [m.sender],
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                    serverMessageId: 0
+                }
+            }
         }, { quoted: reply_status });
         return;
     }
@@ -52,19 +59,26 @@ const handler = async (m, { conn }) => {
         const pic = await conn.profilePictureUrl(m.sender, 'image').catch(() => 'https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png');
         await conn.sendMessage(m.chat, {
             image: { url: pic },
-            caption: `╭─┈─┈─⟞💰⟝─┈─┈─╮
+            caption: `╭─┈─┈─⟞🦾⟝─┈─┈─╮
 ┃ ✅ نـجـحـت الـسـرقـة
-╰─┈─┈─⟞✨⟝─┈─┈─╯
+╰─┈─┈─⟞⚡⟝─┈─┈─╯
 
 ┃ @${m.sender.split('@')[0]}
 ┃ سرقت من @${target.split('@')[0]}
 ┃ 💰 +${available} نقطة
 ┃ ⚠️ سلبته كل اللي عنده!
 
-╭─┈─┈─⟞🎪⟝─┈─┈─╮
-┃ *اسـتـمـر ولا تـتـوقـف* 🔥
-╰─┈─┈─⟞🤡⟝─┈─┈─╯`,
-            contextInfo: { mentionedJid: [m.sender, target] }
+╭─┈─┈─⟞🔥⟝─┈─┈─╮
+┃ *المعركة لسه مخلصتش* 💀
+╰─┈─┈─⟞🌀⟝─┈─┈─╯`,
+            contextInfo: { 
+                mentionedJid: [m.sender, target],
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                    serverMessageId: 0
+                }
+            }
         }, { quoted: reply_status });
         return;
     }
@@ -75,18 +89,25 @@ const handler = async (m, { conn }) => {
     const pic = await conn.profilePictureUrl(m.sender, 'image').catch(() => 'https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png');
     await conn.sendMessage(m.chat, {
         image: { url: pic },
-        caption: `╭─┈─┈─⟞💰⟝─┈─┈─╮
+        caption: `╭─┈─┈─⟞🦾⟝─┈─┈─╮
 ┃ ✅ نـجـحـت الـسـرقـة
-╰─┈─┈─⟞✨⟝─┈─┈─╯
+╰─┈─┈─⟞⚡⟝─┈─┈─╯
 
 ┃ @${m.sender.split('@')[0]}
 ┃ سرقت من @${target.split('@')[0]}
 ┃ 💰 +${stealAmount} نقطة
 
-╭─┈─┈─⟞🎪⟝─┈─┈─╮
-┃ *اسـتـمـر ولا تـتـوقـف* 🔥
-╰─┈─┈─⟞🤡⟝─┈─┈─╯`,
-        contextInfo: { mentionedJid: [m.sender, target] }
+╭─┈─┈─⟞🔥⟝─┈─┈─╮
+┃ *تـاتـاكـاي! إلـى الأمـام* 🦾
+╰─┈─┈─⟞🌀⟝─┈─┈─╯`,
+        contextInfo: { 
+            mentionedJid: [m.sender, target],
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                serverMessageId: 0
+            }
+        }
     }, { quoted: reply_status });
 };
 
