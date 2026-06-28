@@ -34,14 +34,35 @@ handler.before = async (m, { conn }) => {
         }
         
         await conn.sendMessage(m.chat, { 
-            text: `🏆 *الفائزون*\n\n${sorted.join('\n')}\n\n🏅 @${winner.split('@')[0]} حصل على +500 XP و 🍪 +10 كوكيز`,
-            mentions
+            text: `🏆 *أبطال معركة المسابقة* ⚔️\n\n${sorted.join('\n')}\n\n🏅 @${winner.split('@')[0]} حصل على +500 XP و 🍪 +10 كوكيز\n\n> تاتاكاي! استمر في القتال يا بطل 🦾`,
+            mentions,
+            contextInfo: {
+                isForwarded: true,
+                forwardingScore: 1,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                    newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                    serverMessageId: 0
+                }
+            }
         });
         delete global.quiz.scores[m.chat];
         return;
     }
 
-    await m.reply(`✅ احسنت معاك: ${global.quiz.scores[m.chat][player]} نقطه`);
+    await conn.sendMessage(m.chat, {
+        text: `✅ *تاتاكاي! أحسنت يا جندي!* 🔥\nمعاك: ${global.quiz.scores[m.chat][player]} نقطة\n> استمر في القتال 🦾`,
+        mentions: [player],
+        contextInfo: {
+            isForwarded: true,
+            forwardingScore: 1,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                serverMessageId: 0
+            }
+        }
+    });
     handler(m, { conn });
 };
 
@@ -56,11 +77,22 @@ async function handler(m, { conn }) {
     const data = await (await fetch("https://raw.githubusercontent.com/Xov445447533/Xov11111/master/src/JSON/venom-كتابه.json")).json();
     const q = data[Math.floor(Math.random() * data.length)];
     
-    m.reply(`
-╭─┈─┈─┈─⟞🍧⟝─┈─┈─┈─╮
+    await conn.sendMessage(m.chat, {
+        text: `
+╭─┈─┈─┈─⟞⚔️⟝─┈─┈─┈─╮
 ┃ *⌯︙ ${q.question}*
-╰─┈─┈─┈─⟞🍬⟝─┈─┈─┈─╯
-> _*اكتب الكلام بسرعه عشان تتحسبلك نقطه + بعد ٣٠ ثانيه لو مردتش اللعبه هتنتهي*_`);
+╰─┈─┈─┈─⟞🔥⟝─┈─┈─┈─╯
+> _*اكتب الإجابة بسرعة يا جندي! + بعد ٣٠ ثانية لو مردتش المعركة هتنتهي*_ 🦾`,
+        contextInfo: {
+            isForwarded: true,
+            forwardingScore: 1,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                serverMessageId: 0
+            }
+        }
+    }, { quoted: m });
     
     if (!global.quiz.scores[m.chat]) global.quiz.scores[m.chat] = {};
     
@@ -70,7 +102,18 @@ async function handler(m, { conn }) {
             if (global.quiz.games[m.chat]) {
                 delete global.quiz.games[m.chat];
                 delete global.quiz.scores[m.chat];
-                m.reply("`⏰: انتهى الوقت`");
+                conn.sendMessage(m.chat, {
+                    text: `💀 *انتهى الوقت يا ضعيف!*\n> المرة الجاية هتبقى أقوى 🦾`,
+                    contextInfo: {
+                        isForwarded: true,
+                        forwardingScore: 1,
+                        forwardedNewsletterMessageInfo: {
+                            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+                            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+                            serverMessageId: 0
+                        }
+                    }
+                });
             }
         }, 30000)
     };
