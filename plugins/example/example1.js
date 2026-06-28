@@ -1,5 +1,5 @@
 /* 
-by: VA ~ VENOM
+by: VA ~ ERIN
 */
 
 const example = async (m, { conn }) => {
@@ -13,8 +13,8 @@ conn.msgUrl(m.chat,
     big: true,
     mentions: ['201234567890@s.whatsapp.net', '201111111111@s.whatsapp.net'],
     newsletter: {
-      name: '𝐕𝐈𝐈7 ~ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🕷️',
-      jid: '120363225356834044@newsletter'
+      name: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+      jid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter'
     }
   },
   m
@@ -22,19 +22,19 @@ conn.msgUrl(m.chat,
 
 };
 
-example.usage = ["تست1"]
+example.usage = ["تست1"];
 
 
 /* ↓ قسم الأمر ↓ */
-example.category = "example"
+example.category = "example";
 
 
 /* ↓ استخدم الأوامر ↓ */
-example.command = ["تست1"] 
+example.command = ["تست1"];
 
 
 /* ↓ بتعمل ايقاف ل الأمر ↓ */
-example.disabled = false // لو عملتها true بيشتغل ب بدايه لو خليتها false بيشتغل بدون بدايه 
+example.disabled = false; // لو عملتها true بيشتغل ب بدايه لو خليتها false بيشتغل بدون بدايه 
 
 /* ↓ استخدام الأمر بعد ثانيه من الاستخدام لمنع الاسبام ↓ */
 example.cooldown = 1000; // تقدر تزود الثواني 
