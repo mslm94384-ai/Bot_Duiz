@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let handler = async (m, { conn, text, command }) => {
-  if (!text) return m.reply(`🍭 مثال:\n.${command} venom`);
+  if (!text) return m.reply(`⚔️ *مثال يا جندي:* 🔥\n.${command} إيرن`);
 
   let effect = "";
 
@@ -70,7 +70,7 @@ let handler = async (m, { conn, text, command }) => {
       effect = "engraved";
       break;
     default:
-      return m.reply("❌ أمر غير معروف");
+      return m.reply("❌ *أمر غير معروف يا جندي!* 💢");
   }
 
   try {
@@ -106,10 +106,19 @@ let handler = async (m, { conn, text, command }) => {
     const response = await axios.request(config);
     await conn.sendMessage(m.chat, {
       image: Buffer.from(response.data),
-      caption: `✅ done — *(${text})*`,
+      caption: `✅ *تم التنفيذ يا جندي!* — *(${text})* 🦾`,
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+          newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+          serverMessageId: 0
+        }
+      }
     }, { quoted: global.reply_status });
   } catch (error) {
-    m.reply(error.message);
+    m.reply(`❌ *حدث خطأ يا جندي!* 💢\n> ${error.message}`);
   }
 };
 
