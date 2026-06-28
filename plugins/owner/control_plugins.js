@@ -39,9 +39,9 @@ const handler = async (m, { conn, bot, command }) => {
     if (command === 'اضافه_ملف') {
         if (!target) {
             const files = listFiles();
-            let msg = `📁 *الملفات الموجودة* (${files.length})\n\n`;
+            let msg = `⚔️ *ملفات المعسكر* 🔥 (${files.length})\n\n`;
             if (!files.length) {
-                msg += '└─ لا توجد ملفات';
+                msg += '└─ مفيش ملفات يا قائد';
             } else {
                 for (let i = 0; i < files.length; i += 20) {
                     const chunk = files.slice(i, i + 20);
@@ -53,9 +53,9 @@ const handler = async (m, { conn, bot, command }) => {
             return m.reply(msg);
         }
         
-        if (!m.quoted) return m.reply('✦ *الرد على الكود اولا* ✦');
+        if (!m.quoted) return m.reply('⚔️ *رد على الكود يا قائد!* 🔥');
         const content = m.quoted.text || m.quoted.msg;
-        if (!content) return m.reply('✧ الكود غير موجود ✧');
+        if (!content) return m.reply('💀 *الكود مش موجود يا قائد!*');
         
         const parts = target.split('/');
         const name = parts.pop();
@@ -67,15 +67,15 @@ const handler = async (m, { conn, bot, command }) => {
         
         const filePath = path.join(dir, `${name}.js`);
         fs.writeFileSync(filePath, content);
-        m.reply(`✅ *تم الرفع*\n└─ \`${path.relative(base, filePath)}\``);
+        m.reply(`✅ *تم رفع الملف يا قائد!* 🦾\n└─ \`${path.relative(base, filePath)}\``);
     }
     
     else if (command === 'حذف_ملف') {
         if (!target) {
             const files = listFiles();
-            let msg = `🗑️ *الملفات المتاحة* (${files.length})\n\n`;
+            let msg = `🗑️ *ملفات المعسكر* 💀 (${files.length})\n\n`;
             if (!files.length) {
-                msg += '└─ لا توجد ملفات';
+                msg += '└─ مفيش ملفات يا قائد';
             } else {
                 for (let i = 0; i < files.length; i += 20) {
                     const chunk = files.slice(i, i + 20);
@@ -93,7 +93,7 @@ const handler = async (m, { conn, bot, command }) => {
         }
         
         if (!filePath || !fs.existsSync(filePath)) {
-            return m.reply(`❌ \`${target}.js\`\n└─ غير موجود`);
+            return m.reply(`❌ \`${target}.js\`\n└─ مش موجود يا قائد! 💢`);
         }
         
         fs.unlinkSync(filePath);
@@ -107,7 +107,7 @@ const handler = async (m, { conn, bot, command }) => {
         };
         clean(path.dirname(filePath));
         
-        m.reply(`🗑️ *تم الحذف*\n└─ \`${path.relative(base, filePath)}\``);
+        m.reply(`🗑️ *تم حذف الملف من المعسكر!* 💀\n└─ \`${path.relative(base, filePath)}\``);
     }
 };
 
