@@ -14,18 +14,18 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             return null;
         };
 
+        // دالة مساعدة لعمل منشن للشخص
+        const getMentionTag = (userId) => {
+            return `@${userId.split('@')[0]}`;
+        };
+
         if (command === "ضيف") {
             if (!text) return m.reply("❌ فين الرقم؟");
-            if (m.quoted) {
-                await conn.groupParticipantsUpdate(m.chat, [m.quoted.sender], 'add');
-                return m.reply("*✅ تمت الإضافة*");
-            }
-            if (m.mentionedJid && m.mentionedJid.length > 0) {
-                await conn.groupParticipantsUpdate(m.chat, [m.mentionedJid[0]], 'add');
-                return m.reply("*✅ تمت الإضافة*");
-            }
-            await conn.groupParticipantsUpdate(m.chat, [text + "@s.whatsapp.net"], 'add');
-            return m.reply("*✅ تمت الإضافة*");
+            let user = getUser();
+            if (!user) return m.reply("❌ مفيش شخص محدد");
+            
+            await conn.groupParticipantsUpdate(m.chat, [user], 'add');
+            return m.reply(`✅ *تمت إضافة ${getMentionTag(user)} بنجاح* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "انطر") {
@@ -38,10 +38,7 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             }
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'remove');
-            
-            // رسالة الطرد الجديدة
-            const userTag = user.split('@')[0];
-            return m.reply(`🐦 *تم نطرك بنجاح يا @${userTag}* 🐦`, null, { mentions: [user] });
+            return m.reply(`🐦 *تم نطرك بنجاح يا ${getMentionTag(user)}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "رفاعي") {
@@ -53,15 +50,12 @@ let control = async (m, { command, text, conn, bot, participants }) => {
                 const groupMetadata = await conn.groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (member && (member.admin === 'admin' || member.admin === 'superadmin')) {
-                    return m.reply("❌ ده مشرف بالفعل يا معلم 😂");
+                    return m.reply(`❌ ${getMentionTag(user)} مشرف بالفعل يا معلم 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'promote');
-            
-            // رسالة الرفع الجديدة
-            const userTag = user.split('@')[0];
-            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح يا @${userTag}* 🐦`, null, { mentions: [user] });
+            return m.reply(`🐦 *تم اخدك ع رفاعي بنجاح يا ${getMentionTag(user)}* 🐦`, null, { mentions: [user] });
         }
         
         if (command === "ريح") {
@@ -70,23 +64,20 @@ let control = async (m, { command, text, conn, bot, participants }) => {
             
             // منع تنزيل الأونر
             if (isBotOwner(user)) {
-                return m.reply("❌ مش هتنزل الأونر يا معلم 😂");
+                return m.reply(`❌ مش هتنزل ${getMentionTag(user)} الأونر يا معلم 😂`, null, { mentions: [user] });
             }
             
             // التأكد إن الشخص مشرف قبل ما يتنزل
             try {
-                const groupMetadata = await conn.groupMetadata(m.chat);
+                const groupMetadata = await groupMetadata(m.chat);
                 const member = groupMetadata.participants.find(p => p.id === user);
                 if (!member || (member.admin !== 'admin' && member.admin !== 'superadmin')) {
-                    return m.reply("❌ ده مش مشرف أصلاً 😂");
+                    return m.reply(`❌ ${getMentionTag(user)} مش مشرف أصلاً 😂`, null, { mentions: [user] });
                 }
             } catch {}
             
             await conn.groupParticipantsUpdate(m.chat, [user], 'demote');
-            
-            // رسالة التنزيل الجديدة
-            const userTag = user.split('@')[0];
-            return m.reply(`👾 *شوف حد يديك رول بق يا @${userTag}* 👾`, null, { mentions: [user] });
+            return m.reply(`👾 *شوف حد يديك رول بق يا ${getMentionTag(user)}* 👾`, null, { mentions: [user] });
         }
         
     } catch (error) {
