@@ -3,7 +3,7 @@ const participants = await conn.groupMetadata(m.chat).then(metadata => metadata.
 const jids = participants.map(p => p.id);
 
 if (jids.length < 2) {
-    return conn.sendMessage(m.chat, { text: "المجموعة صغيرة جداً" });
+    return conn.sendMessage(m.chat, { text: "💀 *المجموعة صغيرة جداً يا جندي! محتاجين ناس عشان المعركة* ⚔️" });
 }
 
 let randomIndex = Math.floor(Math.random() * jids.length);
@@ -14,15 +14,15 @@ let responseText = "";
 
 switch (command) {
     case "بيحبني":
-        responseText = `*❤️ اكتر واحد بيحبك يا جميل ❤️*\n\n*المستخدم [ @${randomUser.split('@')[0]} ]* \n\n> *نسبة حبه ليك: ${percentage}%* 💕`;
+        responseText = `🔥 *أقوى محارب بيحبك في المعركة* ❤️\n\n*الجندي [ @${randomUser.split('@')[0]} ]* \n\n> *نسبة حبه ليك: ${percentage}%* 💕\n\n> تاتاكاي! الحب سلاح قوي يا جندي 🦾`;
         break;
         
     case "بيكرهني":
-        responseText = `*😡 اكتر واحد بيكرهك 😡*\n\n*المستخدم [ @${randomUser.split('@')[0]} ]* \n\n> *نسبة كرهه ليك: ${percentage}%* 🌚`;
+        responseText = `💢 *أقوى عدو بيكرهك في المعركة* 😤\n\n*الجندي [ @${randomUser.split('@')[0]} ]* \n\n> *نسبة كرهه ليك: ${percentage}%* 💀\n\n> ركز في المعركة يا جندي! الأعداء كتير 🦾`;
         break;
         
     case "بيكراش":
-        responseText = `*💘 اكتشفت مين معجب فيك 💘*\n\n*المستخدم [ @${randomUser.split('@')[0]} ] \n\n> نسبة اعجابه بيك: *${percentage}%* 😍`;
+        responseText = `🫶 *اكتشفت مين معجب بيك في المعركة* 💘\n\n*الجندي [ @${randomUser.split('@')[0]} ]* \n\n> *نسبة اعجابه بيك: ${percentage}%* 😍\n\n> حتى المحاربين عندهم مشاعر يا جندي 🥺💙`;
         break;
         
     default:
@@ -31,7 +31,16 @@ switch (command) {
 
 return conn.sendMessage(m.chat, { 
     text: responseText, 
-    mentions: [randomUser] 
+    mentions: [randomUser],
+    contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            serverMessageId: 0
+        }
+    }
 }, { quoted: m });
 };
 
