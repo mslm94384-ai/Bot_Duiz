@@ -36,12 +36,12 @@ async function convertWebpToJpeg(buffer) {
 }
 
 let handler = async (m, { conn, text }) => {
-  if (!text) return m.reply("النص الي هنفذو\nمثال: .صوره-تعديل اجعل لون البشرة اسود|1:1");
+  if (!text) return m.reply("⚔️ *النص اللي هنفذه يا جندي!* 🔥\n> مثال: .تعديل اجعل لون البشرة اسود|1:1");
   if (!m.quoted || !m.quoted.mimetype || !m.quoted.mimetype.includes('image')) {
-    return m.reply('الصوره الي هتعدلها');
+    return m.reply('⚔️ *رد على الصورة اللي هتعدلها يا جندي!* 🔥');
   }
 
-  m.reply('⏳ Processing...');
+  m.reply('⏳ *جاري التعديل في المعسكر...* 🦾');
 
   try {
     let [prompt, size] = text.split('|');
@@ -107,11 +107,11 @@ let handler = async (m, { conn, text }) => {
 
     await conn.sendMessage(m.chat, {
       image: result,
-      caption: 'Done'
+      caption: '✅ *تم التعديل يا جندي!* 🦾\n\n> تاتاكاي! استمر في القتال 🔥'
     }, { quoted: m });
 
   } catch (e) {
-    m.reply(`Error: ${e.message}`);
+    m.reply(`❌ *حدث خطأ يا جندي!* 💢\n> ${e.message}`);
   }
 };
 
