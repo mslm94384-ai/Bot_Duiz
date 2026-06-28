@@ -3,7 +3,7 @@ const participants = await conn.groupMetadata(m.chat).then(metadata => metadata.
 const jids = participants.map(p => p.id);
 
 if (jids.length < 2) {
-    return conn.sendMessage(m.chat, { text: "المجموعة صغيرة جداً" });
+    return conn.sendMessage(m.chat, { text: "💀 *المجموعة صغيرة جداً يا جندي! محتاجين ناس عشان المعركة* ⚔️" });
 }
 
 let index1 = Math.floor(Math.random() * jids.length);
@@ -24,14 +24,25 @@ const content = {
 };
 
 return conn.sendMessage(m.chat, { 
-    text: `*🥳 مبروك الزواج تمني لكم كل خير 🥳*
+    text: `⚔️ *مبروك الزواج في معسكر الجند!* 🔥
 
-*🤵🏻 العريس:* @${content.user1.split('@')[0]} 
-*🌹 نسبة حبه للعروسه:* ${content.num1}
+*🤵🏻 الجندي:* @${content.user1.split('@')[0]} 
+*💕 نسبة حبه للجندية:* ${content.num1}
 
-*👰🏻‍♀️ العروسه:* @${content.user2.split('@')[0]} 
-*🌹 نسبة حبها للعريس:* ${content.num2}`, 
-    mentions: [content.user1, content.user2] 
+*👰🏻‍♀️ الجندية:* @${content.user2.split('@')[0]} 
+*💕 نسبة حبها للجندي:* ${content.num2}
+
+> تاتاكاي! الحب سلاح قوي في المعركة 🦾❤️`, 
+    mentions: [content.user1, content.user2],
+    contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+            newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+            serverMessageId: 0
+        }
+    }
 }, { quoted: m });
 };
 
