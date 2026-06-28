@@ -1,42 +1,23 @@
-const handler = async (m, { conn, command }) => {
-  if (command === "اقفل يبني") {
-    // قفل المجموعة
-    await conn.groupSettingUpdate(m.chat, 'announcement');
-    
-    // جلب المشاركين لعمل منشن
-    const groupMetadata = await conn.groupMetadata(m.chat);
-    const participants = groupMetadata.participants.map(p => p.id);
-    
-    // رسالة القفل مع منشن للكل
-    const text = `🔒 *البار مقفول يعيال خفو رغي* 🐦\n\n${participants.map(p => `@${p.split('@')[0]}`).join(' ')}`;
-    
-    await conn.sendMessage(m.chat, {
-      text: text,
-      mentions: participants
-    });
-    
-  } else if (command === "هنرش مياه") {
-    // فتح المجموعة
-    await conn.groupSettingUpdate(m.chat, 'not_announcement');
-    
-    // جلب المشاركين لعمل منشن
-    const groupMetadata = await conn.groupMetadata(m.chat);
-    const participants = groupMetadata.participants.map(p => p.id);
-    
-    // رسالة الفتح مع منشن للكل
-    const text = `🔓 *البار مفتوح ارغو يعيال* 🐦🫶🏻\n\n${participants.map(p => `@${p.split('@')[0]}`).join(' ')}`;
-    
-    await conn.sendMessage(m.chat, {
-      text: text,
-      mentions: participants
-    });
-  }
-};
+// أضف ده في ملف الأوامر (admin.js أو main.js)
 
-handler.usage = ["اقفل يبني", "هنرش مياه"];
-handler.category = "admin";
-handler.command = ["اقفل يبني", "هنرش مياه"];
-handler.admin = true;
-handler.botAdmin = true;
+if (command === "هنرش" || command === "اقفل" || command === "قفل") {
+    // قفل المجموعة - منع الكتابة
+    if (!m.isGroup) return m.reply("❌ دي للمجموعات بس");
+    try {
+        await conn.groupSettingUpdate(m.chat, 'announcement');
+        return m.reply("🔒 *تم قفل المجموعة* 🔒\n🚫 ممنوع الكتابة من الأعضاء العاديين");
+    } catch (error) {
+        return m.reply("❌ " + error.message);
+    }
+}
 
-export default handler;
+if (command === "افتح" || command === "فتح") {
+    // فتح المجموعة - السماح بالكتابة
+    if (!m.isGroup) return m.reply("❌ دي للمجموعات بس");
+    try {
+        await conn.groupSettingUpdate(m.chat, 'not_announcement');
+        return m.reply("🔓 *تم فتح المجموعة* 🔓\n✅ كل الأعضاء يقدر يكتبوا دلوقتي");
+    } catch (error) {
+        return m.reply("❌ " + error.message);
+    }
+}
