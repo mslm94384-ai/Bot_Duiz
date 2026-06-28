@@ -3,7 +3,7 @@ import FormData from 'form-data';
 
 let handler = async (m, { conn }) => {
   try {
-    if (!m.quoted) return m.reply("*ابعت الصوره الي و رد عليها الي عاوز انسخ منها الكلام (⁠ ⁠╹⁠▽⁠╹⁠ ⁠)*");
+    if (!m.quoted) return m.reply("⚔️ *رد على الصورة اللي عايز تنسخ منها الكلام يا جندي!* 🔥");
     
     const buffer = await m.quoted.download();
     const form = new FormData();
@@ -13,9 +13,31 @@ let handler = async (m, { conn }) => {
       headers: form.getHeaders()
     });
 
-    await conn.sendMessage(m.chat, { text: res.data.result }, { quoted: m });
+    await conn.sendMessage(m.chat, { 
+      text: res.data.result,
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+          newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+          serverMessageId: 0
+        }
+      }
+    }, { quoted: m });
   } catch (error) {
-    await conn.sendMessage(m.chat, { text: `Err: ${error.message}` }, { quoted: m });
+    await conn.sendMessage(m.chat, { 
+      text: `❌ *حدث خطأ يا جندي!* 💢\n> ${error.message}`,
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '0029VbCoE0P8aKvPbZf8hU1D@newsletter',
+          newsletterName: '𝐄𝐑𝐈𝐍 𝐁𝐎𝐓 🐦',
+          serverMessageId: 0
+        }
+      }
+    }, { quoted: m });
   }
 };
 
