@@ -2,7 +2,7 @@ const handler = async (m, { conn, bot }) => {
   let targetLid = m.mentionedJid?.[0] || m.quoted?.sender;
   let targetJid = m.lid2jid(m.mentionedJid?.[0] || m.quoted?.sender)
    if (!targetJid || !targetLid) {
-    return m.reply('⚠️ *يرجى منشن الشخص أو الرد على رسالته* ⚠️');
+    return m.reply('⚔️ *منشن الجندي أو رد على رسالته يا قائد!* 🔥');
   }
   const user = (await conn.groupMetadata(m.chat)).participants.find(
             p => p.id === targetLid || 
@@ -14,7 +14,7 @@ const handler = async (m, { conn, bot }) => {
        jid: user.phoneNumber,
        lid: user.id
       })
-   m.reply("📂: تم اضافة مطور جديد")
+   m.reply(`✅ *تمت إضافة جندي جديد للقيادة!* 🦾\n\n> تاتاكاي! استعد للمعركة يا قائد 🔥`);
 };
 
 handler.usage = ["اضافه-مطور"];
