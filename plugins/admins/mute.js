@@ -17,7 +17,7 @@ const handler = async (m, { conn, command, bot }) => {
     
     if (!target) return m.reply(`*🔇 كتم/فك_كتم @user*\nاو رد على رسالته`);
     if (typeof target !== 'string') return m.reply(`*❌ حدث خطأ في تحديد المستخدم*`);
-    if (isOwner(target, bot)) return m.reply(`*❌ لا يمكن كتم المطور*`);
+    if (isOwner(target, bot)) return m.reply(`*❌ مينفعش تكتم الأونر يعرص*`);  // ✅ التعديل هنا
     
     const group = global.db.groups[m.chat] ||= {};
     const muteList = group.mute ||= [];
